@@ -18,6 +18,7 @@ public class Lexer {
         afds.add(new MathOperator());
         afds.add(new Number());
         afds.add(new PalavraReservada());
+        afds.add(new Variavel());
     }
 
     public void skipWhiteSpace() {
