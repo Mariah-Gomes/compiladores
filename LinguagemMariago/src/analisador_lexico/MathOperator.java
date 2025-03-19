@@ -10,16 +10,16 @@ public class MathOperator extends AFD {
         switch (code.current()) {
             case '+':
                 code.next();
-                return new Token("PLUS", "+");
+                return new Token("MATH_OP", "+");
             case '-':
                 code.next();
-                return new Token("MINUS", "-");
+                return new Token("MATH_OP", "-");
             case '*':
                 code.next();
-                return new Token("TIMES", "*");
+                return new Token("MATH_OP", "*");
             case '/':
                 code.next();
-                return new Token("DIVIDE", "/");
+                return new Token("MATH_OP", "/");
             case CharacterIterator.DONE:
                 return new Token("EOF", "EOF");
             default:

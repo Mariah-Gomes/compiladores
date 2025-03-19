@@ -21,6 +21,7 @@ public class Lexer {
         afds.add(new Variavel());
         afds.add(new Texto());
         afds.add(new Comentario());
+        afds.add(new ComparisonOperator());
     }
 
     public void skipWhiteSpace() {
