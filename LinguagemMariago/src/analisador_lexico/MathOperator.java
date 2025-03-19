@@ -6,8 +6,8 @@ public class MathOperator extends AFD {
 
     @Override
     public Token evaluate(CharacterIterator code) {
-        switch (code.current()) {
 
+        switch (code.current()) {
             case '+':
                 code.next();
                 return new Token("PLUS", "+");
@@ -20,12 +20,11 @@ public class MathOperator extends AFD {
             case '/':
                 code.next();
                 return new Token("DIVIDE", "/");
-
             case CharacterIterator.DONE:
                 return new Token("EOF", "EOF");
-
             default:
                 return null;
         }
+
     }
 }
