@@ -24,6 +24,7 @@ public class Lexer {
         afds.add(new ComparisonOperator());
         afds.add(new AssignmentOperator());
         afds.add(new Symbol());
+        afds.add(new LogicalOperator());
     }
 
     public void skipWhiteSpace() {
