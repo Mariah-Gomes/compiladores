@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         List<Token> tokens = null;
-        String codigo_fonte = "1 + 2.2 - 3 * 4.4 / 5";
+        String codigo_fonte = "Enlace + 1 + 2.2 - 3 * 4.4 / 5";
         Lexer lexer = new Lexer(codigo_fonte);
         tokens = lexer.getTokens();
         for (Token token : tokens) {
