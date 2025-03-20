@@ -29,6 +29,9 @@ public class Symbol extends AFD{
             case ';':
                 code.next();
                 return new Token("SYMBOL", ";");
+            case ',':
+                code.next();
+                return new Token("SYMBOL", ",");
             case CharacterIterator.DONE:
                 return new Token("EOF", "EOF");
             default:

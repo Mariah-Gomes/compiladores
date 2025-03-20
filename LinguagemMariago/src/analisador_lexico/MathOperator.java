@@ -20,6 +20,9 @@ public class MathOperator extends AFD {
             case '/':
                 code.next();
                 return new Token("MATH_OP", "/");
+            case '%':
+                code.next();
+                return new Token("MATH_OP", "%");
             case CharacterIterator.DONE:
                 return new Token("EOF", "EOF");
             default:

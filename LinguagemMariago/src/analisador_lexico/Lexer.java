@@ -27,8 +27,9 @@ public class Lexer {
         afds.add(new LogicalOperator());
     }
 
+    // \r é quebra de linha no Windows
     public void skipWhiteSpace() {
-        while (code.current() == ' ' || code.current() == '\n') {
+        while (code.current() == ' ' || code.current() == '\n' || code.current() == '\r') {
             code.next();
         }
     }
