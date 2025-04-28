@@ -150,11 +150,16 @@ public class Parser {
     //---------------
     //CICLO
     private boolean ciclo(){
-        if(matchL("Ciclo") && matchL("(") && declaracao() 
-                && requisito() && matchL(";") && matchL("Atualiza") && 
-                matchL("(") && matchT("VARIAVEL") && matchT("MATH_OP") && 
-                idt() && matchL(")") && matchL(")") && matchL("{") &&
+        if(matchL("Ciclo") && matchL("(") && declaracao() && requisito() &&
+                matchL(";") && atualiza() && matchL(")") && matchL("{") &&
                 bloco() && matchL("}")){
+            return true;
+        }
+        return false;
+    }
+    private boolean atualiza(){
+        if(matchL("Atualiza") && matchL("(") && matchT("VARIAVEL") &&
+                matchT("MATH_OP") && idt() && matchL(")")){
             return true;
         }
         return false;
