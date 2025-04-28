@@ -1,12 +1,22 @@
-_codigo para separar numeros pares e impares de um conjunto em dois conjuntos_
-
-Conjunto(Inteiro; nums; 10) = [1,2,3,4,5,6,7,8,9,10];
-Conjunto(Inteiro; pares; Dinamico) = [];
-Conjunto(Inteiro; impares; Dinamico) = [];
-
-Ciclo(Inteiro i = 0; i < 10; Atualiza(i + 1)){
-    Quest(nums[i] % 2 == 0){
-        Si{Insere(pares; Final) = nums[i];}
-        No{Insere(impares; Final) = nums[i];}
+Quest(x >= 10){
+    Si{
+        y = a;
     }
+    No{
+        z = b;
+    }
+}Request(x >= 10){
+    Si{
+        y = a;
+    }
+    No{
+        z = b;
+    }
+}
+Inteiro bumbum = 5;
+Enlace(x < 10){
+    x = 10;
+}
+Ciclo(Inteiro i = 0; i < 10; Atualiza(i + 1)){
+    x = 10;
 }
