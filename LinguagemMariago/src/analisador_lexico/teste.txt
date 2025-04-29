@@ -2,6 +2,17 @@ Quest(x > 1){
     Si{y = 2;}
     No{z = 2;}
 }Request(x == 1){
-    Si{w = 2;}
+    Si{
+        Quest(a > 1){
+            Si{b = 2;}
+            No{c = 2;}
+        }Request(a == 1){
+            Si{
+                Quest(w > 1){
+                    Si{m = 15;}
+                }
+            }
+        }
+    }
 }
 Inteiro o = 24;

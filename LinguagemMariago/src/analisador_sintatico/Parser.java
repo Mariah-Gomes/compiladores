@@ -43,7 +43,8 @@ public class Parser {
     //---------------
     //DECLARAÇÃO DE VARIÁVEL
     private boolean declaracao(){
-        if(tipoVar() && matchT("VARIAVEL") && matchL("=") && idt() && matchL(";")){
+        if(tipoVar() && matchT("VARIAVEL") && matchL("=") && idt() &&
+                matchL(";")){
             return true;
         }
         return false;
@@ -109,7 +110,7 @@ public class Parser {
         return false;
     }
     private boolean bloco(){
-        if(atribuicao()){
+        if(atribuicao() || declaracao() || quest() || enlace() || ciclo()){
             return true;
         }
         return false;
