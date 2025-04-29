@@ -14,28 +14,33 @@
 
 ## Analisador Léxico
 ### Operadores
-#### Operador de Atribuição
-- **ASSI_OP:** "="
 
-#### Operador de Comparação
-- **COMP_OP:** "=="
-- **COMP_OP:** "!="
-- **COMP_OP:** ">="
-- **COMP_OP:** "<="
-- **COMP_OP:** "<"
-- **COMP_OP:** ">"
+#### 📝 Operador de Atribuição
+- **ASSI_OP:** `=`
 
-#### Operador Lógico
-- **LOGI_OP:** "&&"
-- **LOGI_OP:** "||"
+#### 🔍 Operador de Comparação
+| Operador          | Descrição      |
+|-------------------|----------------|
+| **COMP_OP:** `==` | Igualdade      |
+| **COMP_OP:** `!=` | Diferente      |
+| **COMP_OP:** `>=` | Maior ou igual |
+| **COMP_OP:** `<=` | Menor ou igual |
+| **COMP_OP:** `<`  | Menor          |
+| **COMP_OP:** `>`  | Maior          |
 
-#### Operador Matemático
-***
-- **MATH_OP:** "+"
-- **MATH_OP:** "-"
-- **MATH_OP:** "*"
-- **MATH_OP:** "%"
-- **MATH_OP:** "/"
+#### ⚙️ Operador Lógico
+- **LOGI_OP:** `&&` (E lógico)
+- **LOGI_OP:** `||` (Ou lógico)
+
+#### ➗ Operador Matemático
+| Operador          | Descrição     |
+|-------------------|---------------|
+| **MATH_OP:** `+`  | Soma          |
+| **MATH_OP:** `-`  | Subtração     |
+| **MATH_OP:** `*`  | Multiplicação |
+| **MATH_OP:** `%`  | Módulo        |
+| **MATH_OP:** `/`  | Divisão       |
+
 
 
 
