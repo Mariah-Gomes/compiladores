@@ -111,7 +111,7 @@ public class Parser {
     }
     private boolean bloco(){
         if(atribuicao() || declaracao() || quest() || enlace() || ciclo()){
-            while(true){
+            while(true){ // B -> AB | DB | QB | EB | CB | "vazio"
                 if(atribuicao() || declaracao() || quest() || enlace() ||
                         ciclo()){
                     ; // seria uma espera ocupada?
