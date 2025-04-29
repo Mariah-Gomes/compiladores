@@ -127,6 +127,7 @@
 <termo>        ::= <fator> <termo'>
 <termo'>       ::= '*' <fator> <termo'> | '/' <fator> <termo'> | ε
 <fator>        ::= <id> | <numero> | '(' <expressao> ')'
+```
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
