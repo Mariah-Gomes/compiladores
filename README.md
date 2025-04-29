@@ -111,7 +111,7 @@
 | **RESERVADA** | `MenorTo`      |
 
 ## Analisador Sintático
-```bnf
+```text
 <programa>     ::= <declarações> <comandos>
 
 <declarações>  ::= <declaração> <declarações> | ε
