@@ -125,12 +125,29 @@ NUM_INTEIRO → [0-9]⁺
 TEXTO → '"' texto '"'
 
 ### Estrutura Condicional:
-quest → 'Quest' '(' requisito ')' '{' sn '}' request
+quest → 'Quest' '(' requisito ')' '{' sn '}' 'Request' request
+
 requisito → VARIAVEL COMP_OP VARIAVEL || idt
+
 sn → SiNo
+
 Si → 'Si' '{' bloco '}'
+
 No → 'No' '{' bloco '}'
 
+request → '(' requisito ')' '{' sn '}' 'Request' request
+
+bloco → atribuicao bloco || declaracao bloco || quest bloco || enlace bloco || ciclo bloco
+
+**TA FALTANDO ATRIBUIÇÃO QUE NÃO SEI DA ONDE É**
+
+### Laço de Repetição
+enlace → 'Enlace' '(' rr ')' '{' bloco '}'
+rr → requisito || 'Roda'
+
+ciclo → 'Ciclo' '(' declaracao requisito ';' atualiza ')' '{' bloco '}' 
+
+atualiza → 'Atualiza' '(' VARIAVEL MATH_OP idt ')'
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
