@@ -37,10 +37,10 @@
 | **COMP_OP**   | `>`     | Maior            |
 
 #### 🧠 Lógicos
-| Token         | Símbolo        | Descrição   |
-|---------------|----------------|-------------|
-| **LOGI_OP**   | `&&`           | E lógico    |
-| **LOGI_OP**   | `&#124;&#124;` | Ou lógico   |
+| Token         | Símbolo  | Descrição   |
+|---------------|----------|-------------|
+| **LOGI_OP**   | `&&`     | E lógico    |
+| **LOGI_OP**   | `\|\|`   | Ou lógico   |
 
 #### ➗ Matemáticos
 | Token         | Símbolo | Descrição       |
