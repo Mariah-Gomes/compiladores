@@ -1,22 +1,7 @@
-Quest(x >= 10){
-    Si{
-        y = a;
-    }
-    No{
-        z = b;
-    }
-}Request(x >= 10){
-    Si{
-        y = a;
-    }
-    No{
-        z = b;
-    }
+Quest(x > 1){
+    Si{y = 2;}
+    No{z = 2;}
+}Request(x == 1){
+    Si{w = 2;}
 }
-Inteiro bumbum = 5;
-Enlace(x < 10){
-    x = 10;
-}
-Ciclo(Inteiro i = 0; i < 10; Atualiza(i + 1)){
-    x = 10;
-}
+Inteiro o = 24;

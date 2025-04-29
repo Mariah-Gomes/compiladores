@@ -85,7 +85,13 @@ public class Parser {
         return false;
     }
     private boolean sn(){
-        if(si() && no()){
+        if(si()){
+            if(matchL("No")){
+                if(no()){
+                    return true;
+                }
+                return false;
+            }
             return true;
         }
         return false;
@@ -97,7 +103,7 @@ public class Parser {
         return false;
     }
     private boolean no(){
-        if(matchL("No") && matchL("{") && bloco() && matchL("}")){
+        if(matchL("{") && bloco() && matchL("}")){
             return true;
         }
         return false;
