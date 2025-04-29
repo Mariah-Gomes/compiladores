@@ -11,6 +11,8 @@ Quest(x > 1){
                 Quest(w > 1){
                     Si{m = 15;}
                 }
+                Inteiro i = 15;
+                i = 3;
             }
         }
     }

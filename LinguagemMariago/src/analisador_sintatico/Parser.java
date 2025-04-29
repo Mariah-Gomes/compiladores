@@ -111,6 +111,14 @@ public class Parser {
     }
     private boolean bloco(){
         if(atribuicao() || declaracao() || quest() || enlace() || ciclo()){
+            while(true){
+                if(atribuicao() || declaracao() || quest() || enlace() ||
+                        ciclo()){
+                    ; // seria uma espera ocupada?
+                }else{
+                    break;
+                }
+            }
             return true;
         }
         return false;
