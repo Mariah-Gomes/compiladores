@@ -109,7 +109,7 @@ public class Parser {
         }
         return false;
     }
-    private boolean bloco(){ // corrigir: atribuicao() && bloco() ... ?
+    private boolean bloco(){ // corrigir: atribuicao() && bloco() || ... ?
         if(atribuicao() || declaracao() || quest() || enlace() || ciclo()){
             while(true){ // B -> AB | DB | QB | EB | CB | "vazio"
                 if(atribuicao() || declaracao() || quest() || enlace() ||
