@@ -12,51 +12,103 @@
 - Como executar o código
 - Exemplos de código
 
-## Analisador Léxico
-### Operadores
+## 🔍 Analisador Léxico
+### 🔤 Caracteres
+| Token          | Exemplo     |
+|----------------|-------------|
+| **NUM_DECIMAL**| `6.6`       |
+| **NUM_INTEIRO**| `6`         |
+| **TEXTO**      | `Mariago`   |
 
-#### 📝 Operador de Atribuição
-- **ASSI_OP:** `=`
+### ⚙️ Operadores
+#### 📝 Atribuição
+| Token         | Símbolo |
+|---------------|---------|
+| **ASSI_OP**   | `=`     |
 
-#### 🔍 Operador de Comparação
-| Operador          | Descrição      |
-|-------------------|----------------|
-| **COMP_OP:** `==` | Igualdade      |
-| **COMP_OP:** `!=` | Diferente      |
-| **COMP_OP:** `>=` | Maior ou igual |
-| **COMP_OP:** `<=` | Menor ou igual |
-| **COMP_OP:** `<`  | Menor          |
-| **COMP_OP:** `>`  | Maior          |
+#### 🔍 Comparação
+| Token         | Símbolo | Descrição        |
+|---------------|---------|------------------|
+| **COMP_OP**   | `==`    | Igualdade        |
+| **COMP_OP**   | `!=`    | Diferente        |
+| **COMP_OP**   | `>=`    | Maior ou igual   |
+| **COMP_OP**   | `<=`    | Menor ou igual   |
+| **COMP_OP**   | `<`     | Menor            |
+| **COMP_OP**   | `>`     | Maior            |
 
-#### ⚙️ Operador Lógico
-- **LOGI_OP:** `&&` (E lógico)
-- **LOGI_OP:** `||` (Ou lógico)
+#### 🧠 Lógicos
+| Token         | Símbolo | Descrição   |
+|---------------|---------|-------------|
+| **LOGI_OP**   | `&&`    | E lógico    |
+| **LOGI_OP**   | `||`    | Ou lógico   |
 
-#### ➗ Operador Matemático
-| Operador          | Descrição     |
-|-------------------|---------------|
-| **MATH_OP:** `+`  | Soma          |
-| **MATH_OP:** `-`  | Subtração     |
-| **MATH_OP:** `*`  | Multiplicação |
-| **MATH_OP:** `%`  | Módulo        |
-| **MATH_OP:** `/`  | Divisão       |
+#### ➗ Matemáticos
+| Token         | Símbolo | Descrição       |
+|---------------|---------|-----------------|
+| **MATH_OP**   | `+`     | Soma            |
+| **MATH_OP**   | `-`     | Subtração       |
+| **MATH_OP**   | `*`     | Multiplicação   |
+| **MATH_OP**   | `%`     | Módulo          |
+| **MATH_OP**   | `/`     | Divisão         |
 
+### 🔡 Variáveis
+| Token         | Exemplo |
+|---------------|---------|
+| **VARIAVEL**  | `aA`    |
 
+### 🧩 Símbolos
+| Token         | Símbolo |
+|---------------|---------|
+| **SYMBOL**    | `(`     |
+| **SYMBOL**    | `)`     |
+| **SYMBOL**    | `[`     |
+| **SYMBOL**    | `]`     |
+| **SYMBOL**    | `{`     |
+| **SYMBOL**    | `}`     |
+| **SYMBOL**    | `,`     |
+| **SYMBOL**    | `;`     |
 
+### 💬 Comentários
+| Token           | Exemplo     |
+|-----------------|-------------|
+| **COMENTARIO**  | `_texto_`   |
 
-### Declaração de Variáveis
-- **reservada_inteiro:** "Inteiro"
-- **reservada_float:** "Decimal"
-- **reservada_string:** "Texto"
+### 🔑 Palavras Reservadas
+#### 🧠 Tipos de Variável
+| Token         | Palavra        |
+|---------------|----------------|
+| **RESERVADA** | `Inteiro`      |
+| **RESERVADA** | `Decimal`      |
+| **RESERVADA** | `Texto`        |
 
-### Estrutura Condicional
- - **reservada_if**: "Quest"
- - **reservada_elif**: "Request"
- - **reservada_if_afirmativo**: "Si"
- - **reservada_if_negativo**: "No"
-  
-### Laços de Repetição
-### Arrays
+#### 🔀 Estrutura Condicional
+| Token         | Palavra        |
+|---------------|----------------|
+| **RESERVADA** | `Quest`        |
+| **RESERVADA** | `Request`      |
+| **RESERVADA** | `Si`           |
+| **RESERVADA** | `No`           |
+
+#### 🔁 Laços de Repetição
+| Token         | Palavra        |
+|---------------|----------------|
+| **RESERVADA** | `Enlace`       |
+| **RESERVADA** | `Roda`         |
+| **RESERVADA** | `Ciclo`        |
+| **RESERVADA** | `Atualiza`     |
+
+#### 📦 Arrays
+| Token         | Palavra        |
+|---------------|----------------|
+| **RESERVADA** | `Conjunto`     |
+| **RESERVADA** | `Insere`       |
+| **RESERVADA** | `Remove`       |
+| **RESERVADA** | `Ordenar`      |
+| **RESERVADA** | `Dinamico`     |
+| **RESERVADA** | `Inicio`       |
+| **RESERVADA** | `Final`        |
+| **RESERVADA** | `MaiorTo`      |
+| **RESERVADA** | `MenorTo`      |
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
