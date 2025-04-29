@@ -112,21 +112,21 @@
 
 ## Analisador Sintático
 ```text
-<programa>     ::= <declarações> <comandos>
+<programa>       → <declarações> <comandos>
 
-<declarações>  ::= <declaração> <declarações> | ε
-<declaração>   ::= 'int' <id> ';' | 'float' <id> ';'
+<declarações>    → <declaração> <declarações> | ε  
+<declaração>     → 'int' <id> ';' | 'float' <id> ';'
 
-<comandos>     ::= <comando> <comandos> | ε
-<comando>      ::= <id> '=' <expressao> ';'
-                | 'if' '(' <expressao> ')' '{' <comandos> '}'
-                | 'while' '(' <expressao> ')' '{' <comandos> '}'
+<comandos>       → <comando> <comandos> | ε  
+<comando>        → <id> '=' <expressao> ';'  
+                 | 'if' '(' <expressao> ')' '{' <comandos> '}'  
+                 | 'while' '(' <expressao> ')' '{' <comandos> '}'  
 
-<expressao>    ::= <termo> <expressao'>
-<expressao'>   ::= '+' <termo> <expressao'> | '-' <termo> <expressao'> | ε
-<termo>        ::= <fator> <termo'>
-<termo'>       ::= '*' <fator> <termo'> | '/' <fator> <termo'> | ε
-<fator>        ::= <id> | <numero> | '(' <expressao> ')'
+<expressao>      → <termo> <expressao'>  
+<expressao'>     → '+' <termo> <expressao'> | '-' <termo> <expressao'> | ε  
+<termo>          → <fator> <termo'>  
+<termo'>         → '*' <fator> <termo'> | '/' <fator> <termo'> | ε  
+<fator>          → <id> | <numero> | '(' <expressao> ')'
 ```
 
 ## :busts_in_silhouette: Desenvolvedores
