@@ -111,9 +111,7 @@
 | **RESERVADA** | `MenorTo`      |
 
 ## Analisador Sintático
-# 📄 **Documentação da Linguagem - Operação Compiladores**
-
-## 🔹 Declaração de Tipo
+### 🔹 Declaração de Tipo
 ```text
 declaracao  → tipoVar VARIAVEL '=' idt ';'
 tipoVar     → 'Inteiro' | 'Decimal' | 'Texto'
