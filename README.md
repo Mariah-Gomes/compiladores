@@ -146,7 +146,7 @@
 | `rr`       → `requisito` \| `'Roda'`                                                                     |
 | `ciclo`    → `'Ciclo'` `'('` `declaracao` `requisito` `';'` `atualiza` `')'` `'{'` `bloco` `'}'`         |
 | `atualiza` → `'Atualiza'` `'('` `VARIAVEL` `MATH_OP` `idt` `')'`                                         |
-| 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠|
+| 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠|
 | `VARIAVEL` → `[a-z][A-Z a-z]*`                                                                           |
 | `MATH_OP`  → `+` \| `-` \| `*` \| `%` \| `/`                                                             |
 | **Observações:** Regras como, `requisito`, `bloco`, `declaracao`, `idt` já foram mostradas anteriormente |
