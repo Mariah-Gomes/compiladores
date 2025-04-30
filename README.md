@@ -69,9 +69,9 @@
 | **SYMBOL**    | `;`     |
 
 ### 💬 Comentários
-| Token           | Exemplo     |
-|-----------------|-------------|
-| **COMENTARIO**  | `_texto_`   |
+| Token           | Exemplo         |
+|-----------------|-----------------|
+| **COMENTARIO**  | `"_"texto"_"`   |
 
 ### 🔑 Palavras Reservadas
 #### 🧠 Tipos de Variável
@@ -114,34 +114,34 @@
 
 | 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
 |----------------------------------------------------------|
-| `declaracao` → `tipoVar` VARIAVEL `=` `idt` `;`          |
+| `declaracao` → `tipoVar` `VARIAVEL` `=` `idt` `;`        |
 | `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`   |
 | `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
-| 🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷🔷  |
+| 💠 **REGRAS LÉXICAS** 💠                                |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
 | `NUM_INTEIRO` → `[0-9]+`                                 |
 | `TEXTO`       → `"` texto `"`                            |
-| VARIAVEL      → `[a-z][A-Z a-z]*`
+| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |
 
-| 💠 **ESTRUTURA CONDICIONAL** 💠                                                  |
-|-----------------------------------------------------------------------------------|
-| `quest`       →`'Quest'` `'('` requisito `')'` `'{'` sn `'}'` `'Request'` request |
-| `requisito`   → VARIAVEL COMP_OP VARIAVEL \| idt                                  |
+| 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
+|---------------------------------------------------------------------------------------|
+| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `'Request'` `request` |
+| `requisito` → `VARIAVEL` `COMP_OP` `VARIAVEL` \| `idt`                                |
+| `idt`       → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                               |
+| `sn`        → `SiNo`                                                                  |
+| `Si`        → `'Si'` `'{'` `bloco` `'}'`                                              |
+| `No`        → `'No'` `'{'` `bloco` `'}'`                                              |
+| `request`   → `'('` `requisito` `')'` `'{'` `sn` `'}'` `'Request'` `request` \| ε     |
+| `bloco`     → `declaracaobloco` \| `questbloco` \| `enlacebloco` \| `ciclobloco`      |
+| 💠 **REGRAS LÉXICAS** 💠                                                             |
+| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                   |
+| `NUM_INTEIRO` → `[0-9]+`                                                              |
+| `TEXTO`       → `"` texto `"`                                                         |
+| `VARIAVEL`    → `[a-z][A-Z a-z]*`                                                     |
+| `COMP_OP`     → != \| == \| >= \| <= \| < \| >                                        |
 
 
-### 🔹 Estrutura Condicional
-```text
-quest       → 'Quest' '(' requisito ')' '{' sn '}' 'Request' request
-requisito   → VARIAVEL COMP_OP VARIAVEL | idt
 
-sn          → SiNo
-Si          → 'Si' '{' bloco '}'
-No          → 'No' '{' bloco '}'
-
-request     → '(' requisito ')' '{' sn '}' 'Request' request
-
-bloco       → declaracao bloco | quest bloco | enlace bloco | ciclo bloco
-```
 
 ### 🔹 Laço de Repetição
 ```text
