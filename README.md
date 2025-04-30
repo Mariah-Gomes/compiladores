@@ -121,6 +121,7 @@
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
 | `NUM_INTEIRO` → `[0-9]+`                                 |
 | `TEXTO`       → `"` texto `"`                            |
+| VARIAVEL      → `[a-z][A-Z a-z]*`
 
 
 ### 🔹 Estrutura Condicional
