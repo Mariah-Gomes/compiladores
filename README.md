@@ -123,13 +123,18 @@
 | `TEXTO`       → `"` texto `"`                            |
 | VARIAVEL      → `[a-z][A-Z a-z]*`
 
+| 💠 **ESTRUTURA CONDICIONAL** 💠                                                  |
+|-----------------------------------------------------------------------------------|
+| `quest`       →`'Quest'` `'('` requisito `')'` `'{'` sn `'}'` `'Request'` request |
+| `requisito`   → VARIAVEL COMP_OP VARIAVEL \| idt                                  |
+
 
 ### 🔹 Estrutura Condicional
 ```text
 quest       → 'Quest' '(' requisito ')' '{' sn '}' 'Request' request
 requisito   → VARIAVEL COMP_OP VARIAVEL | idt
 
-sn          → Si No
+sn          → SiNo
 Si          → 'Si' '{' bloco '}'
 No          → 'No' '{' bloco '}'
 
