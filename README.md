@@ -114,7 +114,7 @@
 
 | 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
 |----------------------------------------------------------|
-| `declaracao` → `tipoVar` `VARIAVEL` `=` `idt` `;`        |
+| `declaracao` → `tipoVar` `VARIAVEL` `'='` `idt` `;`      |
 | `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`   |
 | `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
 | 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
