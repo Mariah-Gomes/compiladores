@@ -117,7 +117,7 @@
 | `declaracao` → `tipoVar` `VARIAVEL` `=` `idt` `;`        |
 | `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`   |
 | `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
-| 💠 **REGRAS LÉXICAS** 💠                                |
+| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
 | `NUM_INTEIRO` → `[0-9]+`                                 |
 | `TEXTO`       → `"` texto `"`                            |
@@ -133,12 +133,12 @@
 | `No`        → `'No'` `'{'` `bloco` `'}'`                                              |
 | `request`   → `'('` `requisito` `')'` `'{'` `sn` `'}'` `'Request'` `request` \| ε     |
 | `bloco`     → `declaracaobloco` \| `questbloco` \| `enlacebloco` \| `ciclobloco`      |
-| 💠 **REGRAS LÉXICAS** 💠                                                             |
+| 💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠 |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                   |
 | `NUM_INTEIRO` → `[0-9]+`                                                              |
 | `TEXTO`       → `"` texto `"`                                                         |
 | `VARIAVEL`    → `[a-z][A-Z a-z]*`                                                     |
-| `COMP_OP`     → `!=` \| `==` \| `>=` \| <= \| < \| >                                        |
+| `COMP_OP`     → `!=` \| `==` \| `>=` \| `<=` \| `<` \| `>`                            |
 
 
 
