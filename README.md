@@ -111,16 +111,15 @@
 | **RESERVADA** | `MenorTo`      |
 
 ## Analisador Sintático
-### 🔹 Declaração de Tipo
-```text
-declaracao  → tipoVar VARIAVEL '=' idt ';'
-tipoVar     → 'Inteiro' | 'Decimal' | 'Texto'
-idt         → NUM_DECIMAL | NUM_INTEIRO | TEXTO
-
-NUM_DECIMAL → [0-9]+ '.' [0-9]+
-NUM_INTEIRO → [0-9]+
-TEXTO       → '"' texto '"'
-```
+| DECLARAÇÃO DE VARIÁVEIS                        |
+|------------------------------------------------|
+|declaracao  → tipoVar VARIAVEL '=' idt ';'      | 
+|tipoVar     → 'Inteiro' | 'Decimal' | 'Texto'   |
+|idt         → NUM_DECIMAL | NUM_INTEIRO | TEXTO |
+|------------------------------------------------|
+|NUM_DECIMAL → [0-9]+ '.' [0-9]+                 |
+|NUM_INTEIRO → [0-9]+                            |
+|TEXTO       → '"' texto '"'                     |
 
 ### 🔹 Estrutura Condicional
 ```text
