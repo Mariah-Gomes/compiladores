@@ -125,13 +125,13 @@
 
 | 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
 |---------------------------------------------------------------------------------------|
-| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `'Request'` `request` |
+| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` |
 | `requisito` → `VARIAVEL` `COMP_OP` `VARIAVEL` \| `idt`                                |
 | `idt`       → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                               |
 | `sn`        → `SiNo`                                                                  |
 | `Si`        → `'Si'` `'{'` `bloco` `'}'`                                              |
 | `No`        → `'No'` `'{'` `bloco` `'}'`                                              |
-| `request`   → `'('` `requisito` `')'` `'{'` `sn` `'}'` `'Request'` `request` \| ε     |
+| `request`   → `'Request'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` \| ε     |
 | `bloco`     → `declaracaobloco` \| `questbloco` \| `enlacebloco` \| `ciclobloco`      |
 | 💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠 |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                   |
