@@ -68,13 +68,9 @@ public class Parser {
     private boolean quest(){
         if(matchL("Quest") && matchL("(") && requisito() && matchL(")") &&
                 matchL("{") && sn() && matchL("}")){
-            if(matchL("Request")){
-                if(request()){
-                    return true;
-                }
-                return false;
+            if(request()){
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -109,17 +105,11 @@ public class Parser {
         }
         return false;
     }
-    private boolean bloco(){ // corrigir: atribuicao() && bloco() || ... ?
+    private boolean bloco(){
         if(atribuicao() || declaracao() || quest() || enlace() || ciclo()){
-            while(true){ // B -> AB | DB | QB | EB | CB | "vazio"
-                if(atribuicao() || declaracao() || quest() || enlace() ||
-                        ciclo()){
-                    ; // seria uma espera ocupada?
-                }else{
-                    break;
-                }
+            if(bloco() || token.lexema.equals("}")){
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -131,17 +121,16 @@ public class Parser {
         return false;
     }
     private boolean request(){
-        if(matchL("(") && requisito() && matchL(")") &&
+        if(matchL("Request")){
+            if(matchL("(") && requisito() && matchL(")") &&
                 matchL("{") && sn() && matchL("}")){
-            if(matchL("Request")){
                 if(request()){
                     return true;
                 }
-                return false;
             }
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
     //---------------
     
