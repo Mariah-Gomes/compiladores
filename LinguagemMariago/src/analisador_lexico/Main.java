@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import analisador_sintatico.Parser;
+import arvore_sintatica_abstrata.Tree;
 
 public class Main {
 
@@ -17,7 +18,10 @@ public class Main {
             System.out.println(token);
         }
         Parser parser = new Parser(tokens);
-        parser.main();
+        Tree tree = parser.main();
+        //tree.preOrder();
+        //tree.printCode();
+        tree.printTree();
     }
 
 }
