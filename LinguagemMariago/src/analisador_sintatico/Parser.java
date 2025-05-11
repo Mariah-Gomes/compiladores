@@ -20,7 +20,7 @@ public class Parser {
         Tree tree = new Tree(root);
         tree.setRoot(root);
         while(true){
-            if(opcao(root)){
+            if(bloco(root)){
                 ;
             }else if(token.tipo == "EOF"){
                 System.out.println("SINTATICAMENTE CORRETO!!!");
@@ -45,31 +45,37 @@ public class Parser {
         System.out.println("token inválido: " + token.lexema);
     }
     
-    // Aqui coloca todas as opções principais de chamadas.
-    public boolean opcao(Node root){
+    // Aqui coloca todas as opções primárias de chamadas.
+    public boolean opcao(Node root, String nome){
         if(token.lexema.equals("Inteiro") || token.lexema.equals("Decimal")||
                 token.lexema.equals("Texto")){
-            if(declaracao(root)){
+            Node node = root.addNode(nome);
+            if(declaracao(node)){
                 return true;
             }
         }else if(token.tipo.equals("VARIAVEL")){
-            if(atribuicao(root)){
+            Node node = root.addNode(nome);
+            if(atribuicao(node)){
                 return true;
             }
         }else if(token.lexema.equals("Quest")){
-            if(quest(root)){
+            Node node = root.addNode(nome);
+            if(quest(node)){
                 return true;
             }
         }else if(token.lexema.equals("Enlace")){
-            if(enlace(root)){
+            Node node = root.addNode(nome);
+            if(enlace(node)){
                 return true;
             }
         }else if(token.lexema.equals("Para")){
-            if(para(root)){
+            Node node = root.addNode(nome);
+            if(para(node)){
                 return true;
             }
         }else if(token.lexema.equals("Ciclo")){
-            if(ciclo(root)){
+            Node node = root.addNode(nome);
+            if(ciclo(node)){
                 return true;
             }
         }
@@ -156,9 +162,8 @@ public class Parser {
         return false;
     }
     private boolean bloco(Node node){
-        Node bloco = node.addNode("bloco");
-        if(opcao(bloco)){ // Arrumar aqui, essa func "opcao" não ta muito boa aqui
-            if(bloco(bloco)){
+        if(opcao(node, "bloco")){
+            if(bloco(node)){
                 return true;
             }
         }else if(token.lexema.equals("}")){
