@@ -1,20 +1,16 @@
-Quest(x > 1){
-    Si{y = 2;}
-    No{z = 2;}
-}Request(x == 1){
-    Si{
-        Quest(a > 1){
-            Si{b = 2;}
-            No{c = 2;}
-        }Request(a == 1){
-            Si{
-                Quest(w > 1){
-                    Si{m = 15;}
-                }
-                Inteiro i = 15;
-                i = 3;
-            }
+Inteiro i = 5;
+Decimal d = 2.5;
+Texto t = "ok";
+
+Inteiro cont = 0;
+Enlace(Roda){
+    Quest(i < 10){
+        Si{d = 5.0;}
+    }Request(i == 10){
+        Si{d = 4.0;}
+        No{
+            t = "not ok";
+            Para;
         }
     }
 }
-Inteiro o = 24;

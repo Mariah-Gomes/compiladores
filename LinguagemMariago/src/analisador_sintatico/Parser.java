@@ -15,16 +15,15 @@ public class Parser {
     }
     
     public Tree main(){
-        int foda = 0;
         token = getNextToken();
         Node root = new Node("main");
         Tree tree = new Tree(root);
         tree.setRoot(root);
         while(true){
-            if(declaracao(root) || quest(root) || enlace(root) || ciclo(root)){
-                foda++;
+            if(opcao(root)){
+                ;
             }else if(token.tipo == "EOF"){
-                System.out.println("SINTATICAMENTE CORRETO KRLHO!!!");
+                System.out.println("SINTATICAMENTE CORRETO!!!");
                 break;
             }else{
                 erro();
@@ -44,6 +43,37 @@ public class Parser {
     
     private void erro(){
         System.out.println("token inválido: " + token.lexema);
+    }
+    
+    // Aqui coloca todas as opções principais de chamadas.
+    public boolean opcao(Node root){
+        if(token.lexema.equals("Inteiro") || token.lexema.equals("Decimal")||
+                token.lexema.equals("Texto")){
+            if(declaracao(root)){
+                return true;
+            }
+        }else if(token.tipo.equals("VARIAVEL")){
+            if(atribuicao(root)){
+                return true;
+            }
+        }else if(token.lexema.equals("Quest")){
+            if(quest(root)){
+                return true;
+            }
+        }else if(token.lexema.equals("Enlace")){
+            if(enlace(root)){
+                return true;
+            }
+        }else if(token.lexema.equals("Para")){
+            if(para(root)){
+                return true;
+            }
+        }else if(token.lexema.equals("Ciclo")){
+            if(ciclo(root)){
+                return true;
+            }
+        }
+        return false;
     }
     
     //---------------
@@ -82,8 +112,10 @@ public class Parser {
         if(matchL("Quest", quest) && matchL("(", quest) && requisito(quest) &&
                 matchL(")", quest) && matchL("{", quest) && sn(quest) &&
                 matchL("}", quest)){
-            if(request(quest)){
+            if(token.lexema.equals("Request")){
+                if(request(quest)){
                 return true;
+                }
             }
         }
         return false;
@@ -99,7 +131,7 @@ public class Parser {
     private boolean sn(Node node){
         Node sn = node.addNode("sn");
         if(si(sn)){
-            if(matchL("No", sn)){
+            if(token.lexema.equals("No")){
                 if(no(sn)){
                     return true;
                 }
@@ -118,18 +150,19 @@ public class Parser {
     }
     private boolean no(Node node){
         Node no = node.addNode("no");
-        if(matchL("{", no) && bloco(no) && matchL("}", no)){
+        if(matchL("No", no) && matchL("{", no) && bloco(no) && matchL("}", no)){
             return true;
         }
         return false;
     }
     private boolean bloco(Node node){
         Node bloco = node.addNode("bloco");
-        if(atribuicao(bloco) || declaracao(bloco) || quest(bloco) ||
-                enlace(bloco) || ciclo(bloco)){
-            if(bloco(bloco) || token.lexema.equals("}")){
+        if(opcao(bloco)){
+            if(bloco(bloco)){
                 return true;
             }
+        }else if(token.lexema.equals("}")){
+            return true;
         }
         return false;
     }
@@ -148,8 +181,10 @@ public class Parser {
             if(matchL("(", request) && requisito(request) &&
                     matchL(")", request) && matchL("{", request) &&
                     sn(request) && matchL("}", request)){
-                if(request(request)){
-                    return true;
+                if(token.lexema.equals("Request")){
+                    if(request(request)){
+                        return true;
+                    }
                 }
             }
             return false;
@@ -171,7 +206,20 @@ public class Parser {
     }
     private boolean rr(Node node){
         Node rr = node.addNode("rr");
-        if(requisito(rr) || matchL("Roda", rr)){
+        if(token.tipo.equals("VARIAVEL")){
+            if(requisito(rr)){
+                return true;
+            }
+        }else if(token.lexema.equals("Roda")){
+            if(matchL("Roda", rr)){
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean para(Node node){
+        Node para = node.addNode("para");
+        if(matchL("Para", para) && matchL(";", para)){
             return true;
         }
         return false;
@@ -220,4 +268,3 @@ public class Parser {
     }
     
 }
-// sla
