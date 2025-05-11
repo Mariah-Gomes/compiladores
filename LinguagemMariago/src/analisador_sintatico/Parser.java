@@ -157,7 +157,7 @@ public class Parser {
     }
     private boolean bloco(Node node){
         Node bloco = node.addNode("bloco");
-        if(opcao(bloco)){
+        if(opcao(bloco)){ // Arrumar aqui, essa func "opcao" não ta muito boa aqui
             if(bloco(bloco)){
                 return true;
             }
