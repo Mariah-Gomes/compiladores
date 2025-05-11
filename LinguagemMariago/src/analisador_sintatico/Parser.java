@@ -20,7 +20,7 @@ public class Parser {
         Tree tree = new Tree(root);
         tree.setRoot(root);
         while(true){
-            if(bloco(root)){
+            if(bloco(root)){ // toda chamada primária começa a partir de um bloco!
                 ;
             }else if(token.tipo == "EOF"){
                 System.out.println("SINTATICAMENTE CORRETO!!!");
