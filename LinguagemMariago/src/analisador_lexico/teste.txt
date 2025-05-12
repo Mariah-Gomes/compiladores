@@ -10,7 +10,7 @@ Enlace(Roda){
         Si{d = 4.0;}
         No{
             t = "not ok";
-            Para;
+            Quebra;
         }
     }
 }

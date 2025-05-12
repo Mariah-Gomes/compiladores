@@ -19,16 +19,11 @@ public class Parser {
         Node root = new Node("main");
         Tree tree = new Tree(root);
         tree.setRoot(root);
-        while(true){
-            if(bloco(root)){ // toda chamada primária começa a partir de um bloco!
-                ;
-            }else if(token.tipo == "EOF"){
-                System.out.println("SINTATICAMENTE CORRETO!!!");
-                break;
-            }else{
-                erro();
-                break;
-            }
+        bloco(root);
+        if(token.tipo == "EOF"){
+            System.out.println("SINTATICAMENTE CORRETO!!!");
+        }else{
+            erro();
         }
         return tree;
     }
@@ -68,9 +63,9 @@ public class Parser {
             if(enlace(node)){
                 return true;
             }
-        }else if(token.lexema.equals("Para")){
+        }else if(token.lexema.equals("Quebra")){
             Node node = root.addNode(nome);
-            if(para(node)){
+            if(quebra(node)){
                 return true;
             }
         }else if(token.lexema.equals("Ciclo")){
@@ -176,7 +171,7 @@ public class Parser {
     }
     private boolean bloco(Node node){
         if(opcao(node, "bloco")){
-            if(bloco(node)){
+            if(bloco(node)){ // se não for mais um bloco retorna falso!
                 return true;
             }
         }else if(token.lexema.equals("}")){
@@ -192,6 +187,9 @@ public class Parser {
             return true;
         }
         return false;
+    }
+    private boolean expressoes(){
+        
     }
     private boolean request(Node node){
         Node request = node.addNode("request");
@@ -235,9 +233,9 @@ public class Parser {
         }
         return false;
     }
-    private boolean para(Node node){
-        Node para = node.addNode("para");
-        if(matchL("Para", para) && matchL(";", para)){
+    private boolean quebra(Node node){
+        Node quebra = node.addNode("quebra");
+        if(matchL("Quebra", quebra) && matchL(";", quebra)){
             return true;
         }
         return false;
