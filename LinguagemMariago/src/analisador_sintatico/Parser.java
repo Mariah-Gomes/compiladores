@@ -188,9 +188,9 @@ public class Parser {
         }
         return false;
     }
-    private boolean expressoes(){
-        
-    }
+//    private boolean expressoes(){
+//        
+//    }
     private boolean request(Node node){
         Node request = node.addNode("request");
         if(matchL("Request", request)){
