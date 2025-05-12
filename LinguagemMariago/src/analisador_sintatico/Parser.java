@@ -142,6 +142,9 @@ public class Parser {
         }
         return false;
     }
+//    private boolean LogicalOperator(){
+//        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//    }
     private boolean sn(Node node){
         Node sn = node.addNode("sn");
         if(si(sn)){
@@ -189,7 +192,7 @@ public class Parser {
         return false;
     }
 //    private boolean expressoes(){
-//        
+//        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 //    }
     private boolean request(Node node){
         Node request = node.addNode("request");
