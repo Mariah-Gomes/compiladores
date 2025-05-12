@@ -86,10 +86,16 @@ public class Parser {
     //DECLARAÇÃO DE VARIÁVEL
     private boolean declaracao(Node node){
         Node declaracao = node.addNode("declaracao");
-        if(tipoVar(declaracao) && matchT("VARIAVEL", declaracao) &&
-                matchL("=", declaracao) && idt(declaracao) &&
-                matchL(";", declaracao)){
-            return true;
+        if(tipoVar(declaracao) && matchT("VARIAVEL", declaracao)){
+            if(token.lexema.equals("=")){
+                if(valoravel(declaracao)){
+                    if(matchL(";", declaracao)){
+                        return true;
+                    }
+                }
+            }else if(matchL(";", declaracao)){
+                return true;
+            }
         }
         return false;
     }
@@ -105,6 +111,13 @@ public class Parser {
         Node idt = node.addNode("idt");
         if(matchT("NUM_INTEIRO", idt) || matchT("NUM_DECIMAL", idt) ||
                 matchT("TEXTO", idt)){
+            return true;
+        }
+        return false;
+    }
+    private boolean valoravel(Node node){
+        Node valoravel = node.addNode("valoravel");
+        if(matchL("=", valoravel) && idt(valoravel)){
             return true;
         }
         return false;
