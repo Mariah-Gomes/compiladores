@@ -132,7 +132,7 @@
 | `Si`        → `'Si'` `'{'` `bloco` `'}'`                                              |
 | `No`        → `'No'` `'{'` `bloco` `'}'` \| ε                                         |
 | `request`   → `'Request'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` \| ε     |
-| `bloco`     → `declaracao bloco` \| `quest bloco` \| `enlace bloco` \| `ciclo bloco`      |
+| `bloco`     → `declaracao bloco` \| `quest bloco` \| `enlace bloco` \| `ciclo bloco` \| ε     |
 | 💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠 |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                   |
 | `NUM_INTEIRO` → `[0-9]+`                                                              |
