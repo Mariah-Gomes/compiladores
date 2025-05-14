@@ -190,6 +190,7 @@ public class Parser {
         }
         return false;
     }
+    // ELE TA ENTRANDO NO IDT E PRINTANDO NA ÁRVORE MESMO SEM USAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private boolean expressao(Node node){
         Node expressao = node.addNode("expressao");
         if(idt(expressao) || matchT("VARIAVEL", expressao)){
