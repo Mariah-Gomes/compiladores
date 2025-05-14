@@ -94,6 +94,7 @@
 |---------------|----------------|
 | **RESERVADA** | `Enlace`       |
 | **RESERVADA** | `Roda`         |
+| **RESERVADA** | `Quebra`       |
 | **RESERVADA** | `Ciclo`        |
 | **RESERVADA** | `Atualiza`     |
 
@@ -111,9 +112,9 @@
 | **RESERVADA** | `MenorTo`      |
 
 ## 🔎 Analisador Sintático
-| 💠 **BLOCO** 💠                                                                      |
-|---------------------------------------------------------------------------------------|
-| `bloco` → `declaracao bloco` \| `quest bloco` \| `enlace bloco` \| `ciclo bloco` \| ε |
+| 💠 **BLOCO** 💠                                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------------------|
+| `bloco` → `declaracao bloco` \| `atribuicao bloco` \| `quest bloco` \| `enlace bloco` \| `quebra bloco` \| `ciclo bloco` \| ε |
 
 | 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
 |----------------------------------------------------------|
@@ -124,19 +125,33 @@
 | 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
 | `NUM_INTEIRO` → `[0-9]+`                                 |
-| `TEXTO`       → `"` [] `"`                            |
+| `TEXTO`       → `"` [] `"`                               |
 | `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |
+
+| 💠 **ATRIBUIÇÃO** 💠                                    |
+|----------------------------------------------------------|
+| `atribuicao` → `VARIAVEL` `'='` `valor`                  |
+| `valor`      → `VARIAVEL` \| `idt`                       |
+| `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
+| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
+| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
+| `NUM_INTEIRO` → `[0-9]+`                                 |
+| `TEXTO`       → `"` [] `"`                               |
+| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |
+
+| 💠 **INPUT** 💠                       |
+|----------------------------------------|
+| `input` → `'Inserir'` `->` `var` `';'` |
 
 | 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
 |---------------------------------------------------------------------------------------|
-| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` |
+| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request`             |
 | `requisito` → `VARIAVEL` `COMP_OP` `VARIAVEL` \| `idt`                                |
 | `idt`       → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                               |
 | `sn`        → `SiNo`                                                                  |
 | `Si`        → `'Si'` `'{'` `bloco` `'}'`                                              |
 | `No`        → `'No'` `'{'` `bloco` `'}'` \| ε                                         |
 | `request`   → `'Request'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` \| ε     |
-
 | 💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠 |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                   |
 | `NUM_INTEIRO` → `[0-9]+`                                                              |
@@ -144,16 +159,36 @@
 | `VARIAVEL`    → `[a-z][A-Z a-z]*`                                                     |
 | `COMP_OP`     → `!=` \| `==` \| `>=` \| `<=` \| `<` \| `>`                            |
 
-| 💠 **LAÇO DE REPETIÇÃO** 💠                                                                             |
-|----------------------------------------------------------------------------------------------------------|
-| `enlace`   → `'Enlace'` `'('` `rr` `')'` `'{'` `bloco` `'}'`                                             |
-| `rr`       → `requisito` \| `'Roda'`                                                                     |
-| `ciclo`    → `'Ciclo'` `'('` `declaracao` `requisito` `';'` `atualiza` `')'` `'{'` `bloco` `'}'`         |
-| `atualiza` → `'Atualiza'` `'('` `VARIAVEL` `MATH_OP` `idt` `')'`                                         |
-| 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠     |
-| `VARIAVEL` → `[a-z][A-Z a-z]*`                                                                           |
-| `MATH_OP`  → `+` \| `-` \| `*` \| `%` \| `/`                                                             |
-| **Observações:** Regras como, `requisito`, `bloco`, `declaracao`, `idt` já foram mostradas anteriormente |
+| 💠 **QUEBRA** 💠|
+|------------------|
+|`'Quebra'` `';'`  |
+
+
+| 💠 **LAÇO DE REPETIÇÃO** 💠                                                                    |
+|-------------------------------------------------------------------------------------------------|
+| `enlace`   → `'Enlace'` `'('` `rr` `')'` `'{'` `bloco` `'}'`                                    |
+| `rr`       → `requisito` \| `'Roda'`                                                            |
+| `ciclo`    → `'Ciclo'` `'('` `declaracao` `requisito` `';'` `atualiza` `')'` `'{'` `bloco` `'}'`|
+| `atualiza` → `'Atualiza'` `'('` `VARIAVEL` `MATH_OP` `idt` `')'`                                |
+| `idt`      → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                                          |
+| 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 |
+| `VARIAVEL`    → `[a-z][A-Z a-z]*`                                                               |
+| `MATH_OP`     → `+` \| `-` \| `*` \| `%` \| `/`                                                 |
+| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                             |
+| `NUM_INTEIRO` → `[0-9]+`                                                                        |
+| `TEXTO`       → `"` [] `"`                                                                      |
+| **Observações:** Regras como, `requisito`, `declaracao` já foram mostradas anteriormente        |
+
+| 💠 **FUNÇÃO** 💠                                                                               |
+|-------------------------------------------------------------------------------------------------|
+| `funcao`            → `'Destino'` `VARIAVEL` `'('` `parametros_funcao` `')'` `'{'` `bloco` `'}'`|
+| `parametros_funcao` → `tipoVar` `VARIAVEL` `fim` \| ε                                           |
+| `fim` → `','` `parametros_funcao`                                                               |
+| `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`                                          |
+| 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 |
+| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                             |
+| `NUM_INTEIRO` → `[0-9]+`                                                                        |
+| `TEXTO`       → `"` [] `"`                                                                      |
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
