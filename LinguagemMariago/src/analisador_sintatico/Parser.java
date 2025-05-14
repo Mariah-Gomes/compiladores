@@ -20,7 +20,7 @@ public class Parser {
         Tree tree = new Tree(root);
         tree.setRoot(root);
         bloco(root);
-        if(token.tipo == "EOF"){
+        if(token.tipo.equals("EOF")){
             System.out.println("SINTATICAMENTE CORRETO!!!");
         }else{
             erro();
