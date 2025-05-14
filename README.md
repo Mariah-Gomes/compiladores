@@ -14,11 +14,11 @@
 
 ## 🔍 Analisador Léxico
 ### 🔤 Caracteres
-| Token          | Exemplo       |
-|----------------|---------------|
-| **NUM_DECIMAL**| `6.6`         |
-| **NUM_INTEIRO**| `6`           |
-| **TEXTO**      | `"Mariago"`   |
+| Token          | Regra Léxica                                                                   | Exemplo     |
+|----------------|--------------------------------------------------------------------------------|-------------|
+| **NUM_DECIMAL**| `[0-9]<sup>+</sup>``'.'``[0-9]<sup>+</sup>`                                    | `6.6`       |
+| **NUM_INTEIRO**| `[0-9]<sup>+</sup>`                                                            | `6`         |
+| **TEXTO**      | `'"'``[a-zA-Z0-9 ]*` `SYMBOL*` `MATH_OP*` `ASSI_OP*` `COMP_OP*` `LOGI_OP*``'"'`| `"Mariago"` |
 
 ### ⚙️ Operadores
 #### 📝 Atribuição
@@ -111,16 +111,20 @@
 | **RESERVADA** | `MenorTo`      |
 
 ## 🔎 Analisador Sintático
+| 💠 **BLOCO** 💠                                                                      |
+|---------------------------------------------------------------------------------------|
+| `bloco` → `declaracao bloco` \| `quest bloco` \| `enlace bloco` \| `ciclo bloco` \| ε |
 
 | 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
 |----------------------------------------------------------|
-| `declaracao` → `tipoVar` `VARIAVEL` `'='` `idt` `;`      |
+| `declaracao` → `tipoVar` `VARIAVEL` `valoravel` `;`      |
+| `valoravel`  → `'='` `idt` \| ε                          |
 | `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`   |
 | `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
 | 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
 | `NUM_INTEIRO` → `[0-9]+`                                 |
-| `TEXTO`       → `"` texto `"`                            |
+| `TEXTO`       → `"` [] `"`                            |
 | `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |
 
 | 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
@@ -132,7 +136,7 @@
 | `Si`        → `'Si'` `'{'` `bloco` `'}'`                                              |
 | `No`        → `'No'` `'{'` `bloco` `'}'` \| ε                                         |
 | `request`   → `'Request'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` \| ε     |
-| `bloco`     → `declaracao bloco` \| `quest bloco` \| `enlace bloco` \| `ciclo bloco` \| ε     |
+
 | 💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠 |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                   |
 | `NUM_INTEIRO` → `[0-9]+`                                                              |
