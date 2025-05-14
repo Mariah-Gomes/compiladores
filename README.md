@@ -14,11 +14,11 @@
 
 ## 🔍 Analisador Léxico
 ### 🔤 Caracteres
-| Token          | Regra Léxica                                                                   | Exemplo     |
-|----------------|--------------------------------------------------------------------------------|-------------|
-| **NUM_DECIMAL**| `[0-9]<sup>+</sup>``'.'``[0-9]<sup>+</sup>`                                    | `6.6`       |
-| **NUM_INTEIRO**| `[0-9]<sup>+</sup>`                                                            | `6`         |
-| **TEXTO**      | `'"'``[a-zA-Z0-9 ]*` `SYMBOL*` `MATH_OP*` `ASSI_OP*` `COMP_OP*` `LOGI_OP*``'"'`| `"Mariago"` |
+| Token          | Regra Léxica                                                                     | Exemplo     |
+|----------------|----------------------------------------------------------------------------------|-------------|
+| **NUM_DECIMAL**| `[0-9]<sup>+</sup>` `'.'` `[0-9]<sup>+</sup>`                                    | `6.6`       |
+| **NUM_INTEIRO**| `[0-9]<sup>+</sup>`                                                              | `6`         |
+| **TEXTO**      | `'"'` `[a-zA-Z0-9 ]*` `SYMBOL*` `MATH_OP*` `ASSI_OP*` `COMP_OP*` `LOGI_OP*` `'"'`| `"Mariago"` |
 
 ### ⚙️ Operadores
 #### 📝 Atribuição
