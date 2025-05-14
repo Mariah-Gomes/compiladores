@@ -185,15 +185,24 @@ public class Parser {
     private boolean atribuicao(Node node){
         Node atribuicao = node.addNode("atribuicao");
         if(matchT("VARIAVEL", atribuicao) && matchL("=", atribuicao) &&
-                (idt(atribuicao) || matchT("VARIAVEL", atribuicao)) &&
-                matchL(";", atribuicao)){
+                expressao(atribuicao) && matchL(";", atribuicao)){
             return true;
         }
         return false;
     }
-//    private boolean expressoes(){
-//        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-//    }
+    private boolean expressao(Node node){
+        Node expressao = node.addNode("expressao");
+        if(idt(expressao) || matchT("VARIAVEL", expressao)){
+            if(matchT("MATH_OP", expressao)){
+                if(expressao(expressao)){
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
     private boolean request(Node node){
         Node request = node.addNode("request");
         if(matchL("Request", request)){
@@ -287,5 +296,3 @@ public class Parser {
     }
     
 }
-
-// teste
