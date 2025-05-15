@@ -168,11 +168,11 @@
 | 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
 | São: `idt` e `VARIAVEL`                                  |
 
-| 💠 **INPUT** 💠                            |
-|---------------------------------------------|
-| `input` → `'Inserir'` `->` `VARIAVEL` `';'` |
-| 💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠    |
-| São: `idt` e `VARIAVEL`                     |
+### 💠 Input 💠  
+```ebnf
+input → 'Inserir' '(' VARIAVEL ')' ';'
+```
+💠 **Regras Léxicas:** `VARIAVEL`
 
 <!--| 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
 |---------------------------------------------------------------------------------------|
@@ -202,9 +202,10 @@
 | 💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠  |
 | São: `idt`, `VARIAVEL` e `COMP_OP`                                                |
 
-| 💠 **QUEBRA** 💠|
-|------------------|
-|`'Quebra'` `';'`  |
+### 💠 Quebrando o Código 💠  
+```ebnf
+quebra → 'Quebra' ';'
+```
 
 | 💠 **LAÇO DE REPETIÇÃO** 💠                                                                    |
 |-------------------------------------------------------------------------------------------------|
@@ -221,18 +222,6 @@
 | `TEXTO`       → `"` [] `"`                                                                      |
 | **Observações:** Regras como, `requisito`, `declaracao` já foram mostradas anteriormente        |
 
-<!--| 💠 **FUNÇÃO** 💠                                                                               |
-|-------------------------------------------------------------------------------------------------|
-| `funcao`            → `'Destino'` `VARIAVEL` `'('` `parametros_funcao` `')'` `'{'` `bloco` `'}'`|
-| `parametros_funcao` → `tipoVar` `VARIAVEL` `fim` \| ε                                           |
-| `fim` → `','` `parametros_funcao` \| ε                                                          |
-| `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`                                          |
-| 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 |
-| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                             |
-| `NUM_INTEIRO` → `[0-9]+`                                                                        |
-| `TEXTO`       → `"` [] `"`                                                                      |-->
-
-
 ### 💠 Declaração de Função 💠  
 ```ebnf
 funcao            → 'Destino' VARIAVEL '(' parametros_funcao ')' '{' bloco '}'
@@ -240,7 +229,15 @@ parametros_funcao → tipoVar VARIAVEL fim | ε
 fim               → ',' parametros_funcao | ε
 tipoVar           → 'Inteiro' | 'Decimal' | 'Texto'
 ```
-💠 **Regras Léxicas:** `idt`
+💠 **Regras Léxicas:** `idt`, `VARIAVEL`
+
+### 💠 Utilizando a Função 💠  
+```ebnf
+utilizando_funcao → VARIAVEL '(' paramentros_uf ')' ';'
+parametros_uf     → VARIAVEL fim | ε
+fim               → ',' parametros_uf | ε
+```
+💠 **Regras Léxicas:** `VARIAVEL`
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
