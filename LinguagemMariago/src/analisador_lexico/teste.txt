@@ -1,18 +1,13 @@
-Inteiro i = 5;
-Decimal d = 2.5;
-Texto t = "ok";
+Destino bunda(){
+    Inteiro i;
+    Inserir(i);
+    Inteiro m;
+    m = 6 * 6 * 6;
 
-Inteiro cont = 0;
-Enlace(Roda){
-    Quest(i < 10){
-        Si{d = 5.0;}
-    }Request(i == 10){
-        Si{d = 4.0;}
-        No{
-            t = "not ok";
-            Quebra;
+    Enlace(Roda){
+        Quest(i == m && i > 15){
+            Si{Quebra;}
+            No{i = i + 1;}
         }
     }
 }
-
-Inteiro m;
