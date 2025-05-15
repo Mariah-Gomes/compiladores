@@ -189,7 +189,7 @@ request   → 'Request' '(' requisito ')' '{' sn '}' request | ε
 ```ebnf
 quebra → 'Quebra' ';'
 ```
-### 💠 Laço de Repeti~ção 💠  
+### 💠 Laço de Repetição 💠  
 ```ebnf
 enlace   → 'Enlace' '(' rr ')' '{' bloco '}'                                   
 rr       → requisito | 'Roda'                                                          
