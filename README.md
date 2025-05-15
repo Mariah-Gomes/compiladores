@@ -157,33 +157,29 @@ print → 'Exibir' '(' VARIAVEL ')' ';'
 ```
 💠 **Regras Léxicas:** `VARIAVEL`
 
-<!--| 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
-|---------------------------------------------------------------------------------------|
-| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request`             |
-| `requisito` → `VARIAVEL` `COMP_OP` `VARIAVEL` \| `idt`                                |
-| `idt`       → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                               |
-| `sn`        → `SiNo`                                                                  |
-| `Si`        → `'Si'` `'{'` `bloco` `'}'`                                              |
-| `No`        → `'No'` `'{'` `bloco` `'}'` \| ε                                         |
-| `request`   → `'Request'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` \| ε     |
-| 💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠 |
-| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                   |
-| `NUM_INTEIRO` → `[0-9]+`                                                              |
-| `TEXTO`       → `"` texto `"`                                                         |
-| `VARIAVEL`    → `[a-z][A-Z a-z]*`                                                     |
-| `COMP_OP`     → `!=` \| `==` \| `>=` \| `<=` \| `<` \| `>`                            |-->
+### 💠 Print 💠  
+```ebnf
+print → 'Exibir' '(' VARIAVEL ')' ';'
+```
+💠 **Regras Léxicas:** `VARIAVEL`
 
-| 💠 **ESTRUTURA CONDICIONAL** 💠                                                  |
-|-----------------------------------------------------------------------------------|
-| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request`         |
-| `requisito` → `VARIAVEL` `COMP_OP` `VARIAVEL` \| `idt`                            |
-| `idt`       → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                           |
-| `sn`        → `SiNo`                                                              |
-| `Si`        → `'Si'` `'{'` `bloco` `'}'`                                          |
-| `No`        → `'No'` `'{'` `bloco` `'}'` \| ε                                     |
-| `request`   → `'Request'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` \| ε |
-| 💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠  |
-| São: `idt`, `VARIAVEL` e `COMP_OP`                                                |
+### 💠 Print 💠  
+```ebnf
+print → 'Exibir' '(' VARIAVEL ')' ';'
+```
+💠 **Regras Léxicas:** `VARIAVEL`
+
+### 💠 Estrutura Condicional 💠  
+```ebnf
+quest     → 'Quest' '(' requisito ')' '{' sn '}' request
+requisito → VARIAVEL COMP_OP VARIAVEL | idt
+idt       → NUM_DECIMAL | NUM_INTEIRO | TEXTO
+sn        → SiNo                                                              
+Si        → 'Si' '{' bloco '}`                                          
+No        → 'No' '{' `bloco '}' | ε                                     
+request   → 'Request' '(' requisito ')' '{' sn '}' request | ε
+```
+💠 **Regras Léxicas:** `idt`, `VARIAVEL` e `COMP_OP`  
 
 ### 💠 Quebrando o Código 💠  
 ```ebnf
