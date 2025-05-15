@@ -83,6 +83,11 @@ public class Parser {
             if(retorna(node)){
                 return true;
             }
+        }else if(token.lexema.equals("D")){
+            Node node = root.addNode(nome);
+            if(destinando(node)){
+                return true;
+            }
         }else if(token.lexema.equals("Inserir")){
             Node node = root.addNode(nome);
             if(inserir(node)){
@@ -342,6 +347,32 @@ public class Parser {
             return true;
         }
         return false;
+    }
+    private boolean destinando(Node node){
+        Node destinando = node.addNode("destinando");
+        if(matchL("D", destinando) && matchT("VARIAVEL", destinando) &&
+                matchL("(", destinando) && parametrizando(destinando) &&
+                matchL(")", destinando) &&matchL(";", destinando)){
+            return true;
+        }
+        return false;
+    }
+    private boolean parametrizando(Node node){
+        if(token.tipo.equals("VARIAVEL") || token.tipo.equals("NUM_INTEIRO") ||
+                token.tipo.equals("NUM_DECIMAL") || token.tipo.equals("TEXTO")){
+            Node parametrizando = node.addNode("parametrizando");
+            if(matchT("VARIAVEL", parametrizando) || idt(parametrizando)){
+                if(matchL(",", parametrizando)){
+                    if(parametrizando(parametrizando)){
+                        return true;
+                    }
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
     //---------------
     

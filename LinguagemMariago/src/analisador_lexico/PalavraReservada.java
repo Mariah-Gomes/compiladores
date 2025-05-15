@@ -47,6 +47,8 @@ public class PalavraReservada extends AFD{
                     return new Token("RESERVADA", palavra);
                 case "MenorTo":
                     return new Token("RESERVADA", palavra);
+                case "V":
+                    return new Token("RESERVADA", palavra);
                     
                 // ESTRUTURA CONDICIONAL
                 case "Quest":
@@ -74,6 +76,8 @@ public class PalavraReservada extends AFD{
                 case "Destino":
                     return new Token("RESERVADA", palavra);
                 case "Retorna":
+                    return new Token("RESERVADA", palavra);
+                case "D":
                     return new Token("RESERVADA", palavra);
                     
                 // INPUT

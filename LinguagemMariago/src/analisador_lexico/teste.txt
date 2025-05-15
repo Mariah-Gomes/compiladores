@@ -20,3 +20,5 @@ Destino bunda(Inteiro m){
     Retorna 1 + 1;
     Retorna a + 1;
 }
+
+D bunda(15);
