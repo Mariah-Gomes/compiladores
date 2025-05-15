@@ -1,3 +1,7 @@
 Conjunto(Inteiro; bunda; Dinamico) = [1, 1, 1];
 
-D a(1);
+Insere(bunda; Final) = "bunda+";
+
+Remove(bunda; Final);
+
+Ordenar(bunda; MenorTo);

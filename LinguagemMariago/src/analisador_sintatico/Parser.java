@@ -103,6 +103,21 @@ public class Parser {
             if(conjunto(node)){
                 return true;
             }
+        }else if(token.lexema.equals("Insere")){
+            Node node = root.addNode(nome);
+            if(insere(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Remove")){
+            Node node = root.addNode(nome);
+            if(remove(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Ordenar")){
+            Node node = root.addNode(nome);
+            if(ordenar(node)){
+                return true;
+            }
         }
         return false;
     }
@@ -425,6 +440,50 @@ public class Parser {
     private boolean tamanho(Node node){
         Node tamanho = node.addNode("tamanho");
         if(matchL("Dinamico", tamanho) || matchT("NUM_INTEIRO", tamanho)){
+            return true;
+        }
+        return false;
+    }
+    private boolean insere(Node node){
+        Node insere = node.addNode("insere");
+        if(matchL("Insere", insere) && matchL("(", insere) &&
+                matchT("VARIAVEL", insere) && matchL(";", insere) &&
+                index(insere) && matchL(")", insere) && matchL("=", insere) &&
+                idt(insere) && matchL(";", insere)){
+            return true;
+        }
+        return false;
+    }
+    private boolean index(Node node){
+        Node index = node.addNode("index");
+        if(matchL("Inicio", index) || matchL("Final", index) ||
+                matchT("NUM_INTEIRO", index)){
+            return true;
+        }
+        return false;
+    }
+    private boolean remove(Node node){
+        Node remove = node.addNode("remove");
+        if(matchL("Remove", remove) && matchL("(", remove) &&
+                matchT("VARIAVEL", remove) && matchL(";", remove) &&
+                index(remove) && matchL(")", remove) && matchL(";", remove)){
+            return true;
+        }
+        return false;
+    }
+    private boolean ordenar(Node node){
+        Node ordenar = node.addNode("ordenar");
+        if(matchL("Ordenar", ordenar) && matchL("(", ordenar) &&
+                matchT("VARIAVEL", ordenar) && matchL(";", ordenar) &&
+                tipoORD(ordenar) && matchL(")", ordenar) &&
+                matchL(";", ordenar)){
+            return true;
+        }
+        return false;
+    }
+    private boolean tipoORD(Node node){
+        Node tipoORD = node.addNode("tipoORD");
+        if(matchL("MaiorTo", tipoORD) || matchL("MenorTo", tipoORD)){
             return true;
         }
         return false;
