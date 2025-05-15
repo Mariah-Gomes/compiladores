@@ -138,13 +138,16 @@ public class Parser {
         Node requisito = node.addNode("requisito");
         if(matchT("VARIAVEL", requisito) && matchT("COMP_OP", requisito) &&
                 (matchT("VARIAVEL", requisito) || idt(requisito))){
+            if(matchT("LOGI_OP", requisito)){
+                if(requisito(requisito)){
+                    return true;
+                }
+                return false;
+            }
             return true;
         }
         return false;
     }
-//    private boolean LogicalOperator(){
-//        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-//    }
     private boolean sn(Node node){
         Node sn = node.addNode("sn");
         if(si(sn)){
