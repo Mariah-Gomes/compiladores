@@ -157,17 +157,20 @@ print → 'Exibir' '(' VARIAVEL ')' ';'
 ```
 💠 **Regras Léxicas:** `VARIAVEL`
 
-### 💠 Print 💠  
+### 💠 Expressão 💠  
 ```ebnf
-print → 'Exibir' '(' VARIAVEL ')' ';'
+expressao → idt cont | var cont
+cont      →  MATH_OP expressao | ε
 ```
-💠 **Regras Léxicas:** `VARIAVEL`
+💠 **Regras Léxicas:** `idt` e `VARIAVEL`
 
-### 💠 Print 💠  
+### 💠 Requisito 💠  
 ```ebnf
-print → 'Exibir' '(' VARIAVEL ')' ';'
+requisito -> VARIAVEL COMP_OP RouIDT continuacao
+RouIDT -> VARIAVEL | idt
+continuação -> LOGI_OP requisito | e
 ```
-💠 **Regras Léxicas:** `VARIAVEL`
+💠 **Regras Léxicas:** `VARIAVEL`, `idt`, `LOGI_OP` e `COMP_OP`
 
 ### 💠 Estrutura Condicional 💠  
 ```ebnf
@@ -185,21 +188,15 @@ request   → 'Request' '(' requisito ')' '{' sn '}' request | ε
 ```ebnf
 quebra → 'Quebra' ';'
 ```
-
-| 💠 **LAÇO DE REPETIÇÃO** 💠                                                                    |
-|-------------------------------------------------------------------------------------------------|
-| `enlace`   → `'Enlace'` `'('` `rr` `')'` `'{'` `bloco` `'}'`                                    |
-| `rr`       → `requisito` \| `'Roda'`                                                            |
-| `ciclo`    → `'Ciclo'` `'('` `declaracao` `requisito` `';'` `atualiza` `')'` `'{'` `bloco` `'}'`|
-| `atualiza` → `'Atualiza'` `'('` `VARIAVEL` `MATH_OP` `idt` `')'`                                |
-| `idt`      → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                                          |
-| 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 |
-| `VARIAVEL`    → `[a-z][A-Z a-z]*`                                                               |
-| `MATH_OP`     → `+` \| `-` \| `*` \| `%` \| `/`                                                 |
-| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                             |
-| `NUM_INTEIRO` → `[0-9]+`                                                                        |
-| `TEXTO`       → `"` [] `"`                                                                      |
-| **Observações:** Regras como, `requisito`, `declaracao` já foram mostradas anteriormente        |
+### 💠 Laço de Repeti~ção 💠  
+```ebnf
+enlace   → 'Enlace' '(' rr ')' '{' bloco '}'                                   
+rr       → requisito | 'Roda'                                                          
+ciclo    → 'Ciclo' '(' declaracao requisito ';' atualiza ')' '{' bloco '}'
+atualiza → 'Atualiza' '(' VARIAVEL MATH_OP idt ')'                                
+idt      → NUM_DECIMAL | NUM_INTEIRO | TEXTO
+```
+💠 **Regras Léxicas:** `VARIAVEL`, `idt`, `MATH_OP`
 
 ### 💠 Declaração de Função 💠  
 ```ebnf
@@ -217,6 +214,14 @@ parametros_uf     → VARIAVEL fim | ε
 fim               → ',' parametros_uf | ε
 ```
 💠 **Regras Léxicas:** `VARIAVEL`
+
+### 💠 Vetor 💠  
+```ebnf
+vetor   → 'Conjunto' '(' tipoVar ';' VARIAVEL ';' tamanho ')' '=' '[' dentro ']' ';'
+tamanho → 'Fixo' '(' NUM_INTEIRO ')' | 'Dinamico' '(' NUM_INTEIRO ')'
+dentro  → idt | VARIAVEL ',' dentro | ε
+```
+💠 **Regras Léxicas:** `VARIAVEL`, `idt` 
 
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
