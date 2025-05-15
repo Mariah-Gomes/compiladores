@@ -70,9 +70,9 @@
 | **SYMBOL**    | `;`     |
 
 ### 💬 Comentários
-| Token           | Exemplo         |
-|-----------------|-----------------|
-| **COMENTARIO**  | `"_"texto"_"`   |
+| Token           | Regra Léxica                                                                             |
+|-----------------|------------------------------------------------------------------------------------------|
+| **COMENTARIO**  | `"_"` `CARACTER*` `SYMBOL*` `MATH_OP*` `ASSI_OP*` `COMP_OP*` `LOGI_OP*` `VARIAVEL*` "_"` |
 
 ### 🔑 Palavras Reservadas
 #### 🧠 Tipos de Variável
@@ -82,10 +82,16 @@
 | **RESERVADA** | `Decimal`      |
 | **RESERVADA** | `Texto`        |
 
+#### 🗣️ Entrada e Saída de Dados
+| Token         | Palavra  | Equivalência |
+|---------------|----------|--------------|
+| **RESERVADA** | `Insere` | `input`      |
+| **RESERVADA** | `Exibir` | `print`      |
+
 #### 🔀 Estrutura Condicional
 | Token         | Palavra        |
 |---------------|----------------|
-| **RESERVADA** | `Quest`        |
+| **RESERVADA** | `Quest`        | 
 | **RESERVADA** | `Request`      |
 | **RESERVADA** | `Si`           |
 | **RESERVADA** | `No`           |
@@ -111,6 +117,11 @@
 | **RESERVADA** | `Final`        |
 | **RESERVADA** | `MaiorTo`      |
 | **RESERVADA** | `MenorTo`      |
+
+#### 🔧 Função
+| Token         | Palavra   |
+| --------------| ----------|
+| **RESERVADA** | `Destino` |
 
 ## 🔎 Analisador Sintático
 | 💠 **BLOCO** 💠                                                                                                              |
@@ -163,7 +174,7 @@
 | 💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠    |
 | São: `idt` e `VARIAVEL`                     |
 
-| 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
+<!--| 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
 |---------------------------------------------------------------------------------------|
 | `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request`             |
 | `requisito` → `VARIAVEL` `COMP_OP` `VARIAVEL` \| `idt`                                |
@@ -177,12 +188,23 @@
 | `NUM_INTEIRO` → `[0-9]+`                                                              |
 | `TEXTO`       → `"` texto `"`                                                         |
 | `VARIAVEL`    → `[a-z][A-Z a-z]*`                                                     |
-| `COMP_OP`     → `!=` \| `==` \| `>=` \| `<=` \| `<` \| `>`                            |
+| `COMP_OP`     → `!=` \| `==` \| `>=` \| `<=` \| `<` \| `>`                            |-->
+
+| 💠 **ESTRUTURA CONDICIONAL** 💠                                                  |
+|-----------------------------------------------------------------------------------|
+| `quest`     →`'Quest'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request`         |
+| `requisito` → `VARIAVEL` `COMP_OP` `VARIAVEL` \| `idt`                            |
+| `idt`       → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO`                           |
+| `sn`        → `SiNo`                                                              |
+| `Si`        → `'Si'` `'{'` `bloco` `'}'`                                          |
+| `No`        → `'No'` `'{'` `bloco` `'}'` \| ε                                     |
+| `request`   → `'Request'` `'('` `requisito` `')'` `'{'` `sn` `'}'` `request` \| ε |
+| 💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠  |
+| São: `idt`, `VARIAVEL` e `COMP_OP`                                                |
 
 | 💠 **QUEBRA** 💠|
 |------------------|
 |`'Quebra'` `';'`  |
-
 
 | 💠 **LAÇO DE REPETIÇÃO** 💠                                                                    |
 |-------------------------------------------------------------------------------------------------|
@@ -199,7 +221,7 @@
 | `TEXTO`       → `"` [] `"`                                                                      |
 | **Observações:** Regras como, `requisito`, `declaracao` já foram mostradas anteriormente        |
 
-| 💠 **FUNÇÃO** 💠                                                                               |
+<!--| 💠 **FUNÇÃO** 💠                                                                               |
 |-------------------------------------------------------------------------------------------------|
 | `funcao`            → `'Destino'` `VARIAVEL` `'('` `parametros_funcao` `')'` `'{'` `bloco` `'}'`|
 | `parametros_funcao` → `tipoVar` `VARIAVEL` `fim` \| ε                                           |
@@ -208,8 +230,17 @@
 | 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠💠💠💠💠💠💠💠💠 |
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                                                             |
 | `NUM_INTEIRO` → `[0-9]+`                                                                        |
-| `TEXTO`       → `"` [] `"`                                                                      |
+| `TEXTO`       → `"` [] `"`                                                                      |-->
 
+
+### Declaração de Função 
+```ebnf
+funcao            → 'Destino' VARIAVEL '(' parametros_funcao ')' '{' bloco '}'
+parametros_funcao → tipoVar VARIAVEL fim | ε
+fim               → ',' parametros_funcao | ε
+tipoVar           → 'Inteiro' | 'Decimal' | 'Texto'
+```
+                                                                           |
 ## :busts_in_silhouette: Desenvolvedores
 | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/e6827fd1-d8fe-4740-b6fc-fbbfccd05752" width=115><br><sub>Mariah Santos Gomes</sub>](https://github.com/Mariah-Gomes) | [<img loading="lazy" src="https://github.com/Mariah-Gomes/ProjetoCompMovel1/assets/141663285/66d7e656-b9e4-43b7-94fa-931b736df881" width=115><br><sub>Iago Rosa de Oliveira</sub>](https://github.com/iagorosa28) |
 | :---: | :---: |
