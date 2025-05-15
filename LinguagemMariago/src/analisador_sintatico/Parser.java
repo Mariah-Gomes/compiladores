@@ -78,9 +78,19 @@ public class Parser {
             if(destino(node)){
                 return true;
             }
+        }else if(token.lexema.equals("Retorna")){
+            Node node = root.addNode(nome);
+            if(retorna(node)){
+                return true;
+            }
         }else if(token.lexema.equals("Inserir")){
             Node node = root.addNode(nome);
             if(inserir(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Exibir")){
+            Node node = root.addNode(nome);
+            if(exibir(node)){
                 return true;
             }
         }
@@ -203,7 +213,7 @@ public class Parser {
         }
         return false;
     }
-    private boolean expressao(Node node){
+    private boolean expressao(Node node){ // corrigir que fica aparecendo expressão toda hora
         Node expressao = node.addNode("expressao");
         if(matchT("VARIAVEL", expressao) || idt(expressao)){
             if(matchT("MATH_OP", expressao)){
@@ -303,18 +313,19 @@ public class Parser {
         return false;
     }
     private boolean parametro(Node node){
-        Node parametro = node.addNode("parametro");
         if(simpleTipoVar()){
+            Node parametro = node.addNode("parametro");
             if(tipoVar(parametro) && matchT("VARIAVEL", parametro)){
                 if(matchL(",", parametro)){
                     if(parametro(parametro)){
                         return true;
                     }
+                    return false;
                 }
-                return false;
+                return true;
             }
+            return false;
         }
-        vazio(parametro);
         return true;
     }
     private boolean simpleTipoVar(){
@@ -324,8 +335,13 @@ public class Parser {
         }
         return false;
     }
-    private void vazio(Node node){
-        node.addNode("NULL");
+    private boolean retorna(Node node){
+        Node retorna = node.addNode("retorna");
+        if(matchL("Retorna", retorna) && expressao(retorna) && 
+                matchL(";", retorna)){
+            return true;
+        }
+        return false;
     }
     //---------------
     
@@ -336,6 +352,19 @@ public class Parser {
         if(matchL("Inserir", inserir) && matchL("(", inserir) &&
                 matchT("VARIAVEL", inserir) && matchL(")", inserir) &&
                 matchL(";", inserir)){
+            return true;
+        }
+        return false;
+    }
+    //---------------
+    
+    //---------------
+    //EXIBIR
+    private boolean exibir(Node node){
+        Node exibir = node.addNode("exibir");
+        if(matchL("Exibir", exibir) && matchL("(", exibir) &&
+                (matchT("VARIAVEL", exibir) || idt(exibir)) && 
+                matchL(")", exibir) && matchL(";", exibir)){
             return true;
         }
         return false;
