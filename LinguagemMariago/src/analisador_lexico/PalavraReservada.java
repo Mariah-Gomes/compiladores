@@ -70,6 +70,16 @@ public class PalavraReservada extends AFD{
                 case "Quebra":
                     return new Token("RESERVADA", palavra);
                     
+                // FUNÇÂO
+                case "Destino":
+                    return new Token("RESERVADA", palavra);
+                case "Retorna":
+                    return new Token("RESERVADA", palavra);
+                    
+                // INPUT
+                case "Inserir":
+                    return new Token("RESERVADA", palavra); 
+                    
                 default:
                     return null;
             }

@@ -1,10 +1,13 @@
-Inteiro i = 0;
-Inteiro m;
-m = 6 * 6 * 6;
+Destino bunda(){
+    Inteiro i;
+    Inserir(i);
+    Inteiro m;
+    m = 6 * 6 * 6;
 
-Enlace(Roda){
-    Quest(i == m && i > 15){
-        Si{Quebra;}
-        No{i = i + 1;}
+    Enlace(Roda){
+        Quest(i == m && i > 15){
+            Si{Quebra;}
+            No{i = i + 1;}
+        }
     }
 }

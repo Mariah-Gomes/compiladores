@@ -73,6 +73,16 @@ public class Parser {
             if(ciclo(node)){
                 return true;
             }
+        }else if(token.lexema.equals("Destino")){
+            Node node = root.addNode(nome);
+            if(destino(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Inserir")){
+            Node node = root.addNode(nome);
+            if(inserir(node)){
+                return true;
+            }
         }
         return false;
     }
@@ -274,6 +284,58 @@ public class Parser {
         if(matchL("Atualiza", atualiza) && matchL("(", atualiza) &&
                 matchT("VARIAVEL", atualiza) && matchT("MATH_OP", atualiza) &&
                 idt(atualiza) && matchL(")", atualiza)){
+            return true;
+        }
+        return false;
+    }
+    //---------------
+    
+    //---------------
+    //DESTINO
+    private boolean destino(Node node){
+        Node destino = node.addNode("destino");
+        if(matchL("Destino", destino) && matchT("VARIAVEL", destino) &&
+                matchL("(", destino) && parametro(destino) && 
+                matchL(")", destino) && matchL("{", destino) && bloco(destino)
+                && matchL("}", destino)){
+            return true;
+        }
+        return false;
+    }
+    private boolean parametro(Node node){
+        Node parametro = node.addNode("parametro");
+        if(simpleTipoVar()){
+            if(tipoVar(parametro) && matchT("VARIAVEL", parametro)){
+                if(matchL(",", parametro)){
+                    if(parametro(parametro)){
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        vazio(parametro);
+        return true;
+    }
+    private boolean simpleTipoVar(){
+        if(token.lexema.equals("Inteiro") || token.lexema.equals("Decimal") ||
+                token.lexema.equals("Texto")){
+            return true;
+        }
+        return false;
+    }
+    private void vazio(Node node){
+        node.addNode("NULL");
+    }
+    //---------------
+    
+    //---------------
+    //INSERIR
+    private boolean inserir(Node node){
+        Node inserir = node.addNode("inserir");
+        if(matchL("Inserir", inserir) && matchL("(", inserir) &&
+                matchT("VARIAVEL", inserir) && matchL(")", inserir) &&
+                matchL(";", inserir)){
             return true;
         }
         return false;
