@@ -98,6 +98,11 @@ public class Parser {
             if(exibir(node)){
                 return true;
             }
+        }else if(token.lexema.equals("Conjunto")){
+            Node node = root.addNode(nome);
+            if(conjunto(node)){
+                return true;
+            }
         }
         return false;
     }
@@ -351,19 +356,19 @@ public class Parser {
     private boolean destinando(Node node){
         Node destinando = node.addNode("destinando");
         if(matchL("D", destinando) && matchT("VARIAVEL", destinando) &&
-                matchL("(", destinando) && parametrizando(destinando) &&
+                matchL("(", destinando) && pd(destinando, "parametrizando") &&
                 matchL(")", destinando) &&matchL(";", destinando)){
             return true;
         }
         return false;
     }
-    private boolean parametrizando(Node node){
+    private boolean pd(Node node, String qual){ // assim serve para o Destino e o Conjunto
         if(token.tipo.equals("VARIAVEL") || token.tipo.equals("NUM_INTEIRO") ||
                 token.tipo.equals("NUM_DECIMAL") || token.tipo.equals("TEXTO")){
-            Node parametrizando = node.addNode("parametrizando");
-            if(matchT("VARIAVEL", parametrizando) || idt(parametrizando)){
-                if(matchL(",", parametrizando)){
-                    if(parametrizando(parametrizando)){
+            Node pdpd = node.addNode(qual);
+            if(matchT("VARIAVEL", pdpd) || idt(pdpd)){
+                if(matchL(",", pdpd)){
+                    if(pd(pdpd, qual)){
                         return true;
                     }
                     return false;
@@ -396,6 +401,30 @@ public class Parser {
         if(matchL("Exibir", exibir) && matchL("(", exibir) &&
                 (matchT("VARIAVEL", exibir) || idt(exibir)) && 
                 matchL(")", exibir) && matchL(";", exibir)){
+            return true;
+        }
+        return false;
+    }
+    //---------------
+    
+    //---------------
+    //CONJUNTO
+    private boolean conjunto(Node node){
+        Node conjunto = node.addNode("conjunto");
+        if(matchL("Conjunto", conjunto) && matchL("(", conjunto) &&
+                tipoVar(conjunto) && matchL(";", conjunto) &&
+                matchT("VARIAVEL", conjunto) && matchL(";", conjunto) &&
+                tamanho(conjunto) && matchL(")", conjunto) &&
+                matchL("=", conjunto) && matchL("[", conjunto) &&
+                pd(conjunto, "dentro") && matchL("]", conjunto) &&
+                matchL(";", conjunto)){
+            return true;
+        }
+        return false;
+    }
+    private boolean tamanho(Node node){
+        Node tamanho = node.addNode("tamanho");
+        if(matchL("Dinamico", tamanho) || matchT("NUM_INTEIRO", tamanho)){
             return true;
         }
         return false;
