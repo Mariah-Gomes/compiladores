@@ -1,22 +1,7 @@
-Destino bunda(Inteiro m){
-    Inteiro i;
-    Inserir(i);
-    m = 6 * 6 * 6;
-    Enlace(Roda){
-        Quest(i == m && i > 15){
-            Si{
-                Exibir(i);
-                Exibir(10);
-                Exibir(9.99);
-                Exibir("bumbum");
-                Quebra;
-            }
-            No{i = i + 1;}
-        }
-    }
-    Retorna a;
-    Retorna 1;
-    Retorna a + a;
-    Retorna 1 + 1;
-    Retorna a + 1;
-}
+Conjunto(Inteiro; bunda; Dinamico) = [1, 1, 1];
+
+Insere(bunda; Final) = "bunda+";
+
+Remove(bunda; Final);
+
+Ordenar(bunda; MenorTo);

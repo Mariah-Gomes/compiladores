@@ -83,6 +83,11 @@ public class Parser {
             if(retorna(node)){
                 return true;
             }
+        }else if(token.lexema.equals("D")){
+            Node node = root.addNode(nome);
+            if(destinando(node)){
+                return true;
+            }
         }else if(token.lexema.equals("Inserir")){
             Node node = root.addNode(nome);
             if(inserir(node)){
@@ -91,6 +96,26 @@ public class Parser {
         }else if(token.lexema.equals("Exibir")){
             Node node = root.addNode(nome);
             if(exibir(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Conjunto")){
+            Node node = root.addNode(nome);
+            if(conjunto(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Insere")){
+            Node node = root.addNode(nome);
+            if(insere(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Remove")){
+            Node node = root.addNode(nome);
+            if(remove(node)){
+                return true;
+            }
+        }else if(token.lexema.equals("Ordenar")){
+            Node node = root.addNode(nome);
+            if(ordenar(node)){
                 return true;
             }
         }
@@ -343,6 +368,32 @@ public class Parser {
         }
         return false;
     }
+    private boolean destinando(Node node){
+        Node destinando = node.addNode("destinando");
+        if(matchL("D", destinando) && matchT("VARIAVEL", destinando) &&
+                matchL("(", destinando) && pd(destinando, "parametrizando") &&
+                matchL(")", destinando) &&matchL(";", destinando)){
+            return true;
+        }
+        return false;
+    }
+    private boolean pd(Node node, String qual){ // assim serve para o Destino e o Conjunto
+        if(token.tipo.equals("VARIAVEL") || token.tipo.equals("NUM_INTEIRO") ||
+                token.tipo.equals("NUM_DECIMAL") || token.tipo.equals("TEXTO")){
+            Node pdpd = node.addNode(qual);
+            if(matchT("VARIAVEL", pdpd) || idt(pdpd)){
+                if(matchL(",", pdpd)){
+                    if(pd(pdpd, qual)){
+                        return true;
+                    }
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
     //---------------
     
     //---------------
@@ -365,6 +416,74 @@ public class Parser {
         if(matchL("Exibir", exibir) && matchL("(", exibir) &&
                 (matchT("VARIAVEL", exibir) || idt(exibir)) && 
                 matchL(")", exibir) && matchL(";", exibir)){
+            return true;
+        }
+        return false;
+    }
+    //---------------
+    
+    //---------------
+    //CONJUNTO
+    private boolean conjunto(Node node){
+        Node conjunto = node.addNode("conjunto");
+        if(matchL("Conjunto", conjunto) && matchL("(", conjunto) &&
+                tipoVar(conjunto) && matchL(";", conjunto) &&
+                matchT("VARIAVEL", conjunto) && matchL(";", conjunto) &&
+                tamanho(conjunto) && matchL(")", conjunto) &&
+                matchL("=", conjunto) && matchL("[", conjunto) &&
+                pd(conjunto, "dentro") && matchL("]", conjunto) &&
+                matchL(";", conjunto)){
+            return true;
+        }
+        return false;
+    }
+    private boolean tamanho(Node node){
+        Node tamanho = node.addNode("tamanho");
+        if(matchL("Dinamico", tamanho) || matchT("NUM_INTEIRO", tamanho)){
+            return true;
+        }
+        return false;
+    }
+    private boolean insere(Node node){
+        Node insere = node.addNode("insere");
+        if(matchL("Insere", insere) && matchL("(", insere) &&
+                matchT("VARIAVEL", insere) && matchL(";", insere) &&
+                index(insere) && matchL(")", insere) && matchL("=", insere) &&
+                idt(insere) && matchL(";", insere)){
+            return true;
+        }
+        return false;
+    }
+    private boolean index(Node node){
+        Node index = node.addNode("index");
+        if(matchL("Inicio", index) || matchL("Final", index) ||
+                matchT("NUM_INTEIRO", index)){
+            return true;
+        }
+        return false;
+    }
+    private boolean remove(Node node){
+        Node remove = node.addNode("remove");
+        if(matchL("Remove", remove) && matchL("(", remove) &&
+                matchT("VARIAVEL", remove) && matchL(";", remove) &&
+                index(remove) && matchL(")", remove) && matchL(";", remove)){
+            return true;
+        }
+        return false;
+    }
+    private boolean ordenar(Node node){
+        Node ordenar = node.addNode("ordenar");
+        if(matchL("Ordenar", ordenar) && matchL("(", ordenar) &&
+                matchT("VARIAVEL", ordenar) && matchL(";", ordenar) &&
+                tipoORD(ordenar) && matchL(")", ordenar) &&
+                matchL(";", ordenar)){
+            return true;
+        }
+        return false;
+    }
+    private boolean tipoORD(Node node){
+        Node tipoORD = node.addNode("tipoORD");
+        if(matchL("MaiorTo", tipoORD) || matchL("MenorTo", tipoORD)){
             return true;
         }
         return false;
