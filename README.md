@@ -153,9 +153,10 @@ input → 'Inserir' '(' VARIAVEL ')' ';'
 
 ### 💠 Print 💠  
 ```ebnf
-print → 'Exibir' '(' VARIAVEL ')' ';'
+print       → 'Exibir' '(' VARIAVEL ')' ';'
+continuacao → VARIAVEL | idt 
 ```
-💠 **Regras Léxicas:** `VARIAVEL`
+💠 **Regras Léxicas:** `VARIAVEL` e `idt`
 
 ### 💠 Expressão 💠  
 ```ebnf
