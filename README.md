@@ -124,9 +124,10 @@
 | **RESERVADA** | `Destino` |
 
 ## 🔎 Analisador Sintático
-| 💠 **BLOCO** 💠                                                                                                              |
-|-------------------------------------------------------------------------------------------------------------------------------|
-| `bloco` → `declaracao bloco` \| `atribuicao bloco` \| `quest bloco` \| `enlace bloco` \| `quebra bloco` \| `ciclo bloco` \| ε |
+### 💠 Bloco 💠  
+```ebnf
+bloco → declaracao bloco | atribuicao bloco | quest bloco | enlace bloco | quebra bloco | ciclo bloco | ε
+```
 
 <!--| 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
 |----------------------------------------------------------|
