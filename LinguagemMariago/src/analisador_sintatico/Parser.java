@@ -78,6 +78,11 @@ public class Parser {
             if(destino(node)){
                 return true;
             }
+        }else if(token.lexema.equals("Retorna")){
+            Node node = root.addNode(nome);
+            if(retorna(node)){
+                return true;
+            }
         }else if(token.lexema.equals("Inserir")){
             Node node = root.addNode(nome);
             if(inserir(node)){
@@ -208,7 +213,7 @@ public class Parser {
         }
         return false;
     }
-    private boolean expressao(Node node){
+    private boolean expressao(Node node){ // corrigir que fica aparecendo expressão toda hora
         Node expressao = node.addNode("expressao");
         if(matchT("VARIAVEL", expressao) || idt(expressao)){
             if(matchT("MATH_OP", expressao)){
@@ -307,7 +312,7 @@ public class Parser {
         }
         return false;
     }
-    private boolean parametro(Node node){ // corrigir quando não for nada...
+    private boolean parametro(Node node){
         if(simpleTipoVar()){
             Node parametro = node.addNode("parametro");
             if(tipoVar(parametro) && matchT("VARIAVEL", parametro)){
@@ -326,6 +331,14 @@ public class Parser {
     private boolean simpleTipoVar(){
         if(token.lexema.equals("Inteiro") || token.lexema.equals("Decimal") ||
                 token.lexema.equals("Texto")){
+            return true;
+        }
+        return false;
+    }
+    private boolean retorna(Node node){
+        Node retorna = node.addNode("retorna");
+        if(matchL("Retorna", retorna) && expressao(retorna) && 
+                matchL(";", retorna)){
             return true;
         }
         return false;

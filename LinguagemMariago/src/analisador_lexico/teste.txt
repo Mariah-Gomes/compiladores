@@ -14,4 +14,9 @@ Destino bunda(Inteiro m){
             No{i = i + 1;}
         }
     }
+    Retorna a;
+    Retorna 1;
+    Retorna a + a;
+    Retorna 1 + 1;
+    Retorna a + 1;
 }
