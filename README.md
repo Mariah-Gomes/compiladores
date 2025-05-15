@@ -19,7 +19,7 @@
 | **NUM_DECIMAL**| <code>[0-9]<sup>+</sup></code> `'.'` <code>[0-9]<sup>+</sup></code>               | `6.6`       |
 | **NUM_INTEIRO**| <code>[0-9]<sup>+</sup></code>                                                    | `6`         |
 | **TEXTO**      | `'"'` `CARACTER*` `SYMBOL*` `MATH_OP*` `ASSI_OP*` `COMP_OP*` `LOGI_OP*`  `'"'`    | `"Mariago"` |
-| **CARACTER**   | <code>[A-Za-z]<sup>+</sup></code>
+| **CARACTER**   | <code>[A-Za-z]<sup>+</sup></code>                                                 | `A`         |
 
 ### ⚙️ Operadores
 #### 📝 Atribuição
@@ -53,9 +53,9 @@
 | **MATH_OP**   | `/`     | Divisão         |
 
 ### 🔡 Variáveis
-| Token         | Exemplo |
-|---------------|---------|
-| **VARIAVEL**  | `aA`    |
+| Token         | Regra Léxica                                       | Exemplo |
+|---------------|----------------------------------------------------|---------|
+| **VARIAVEL**  | <code>[a-z]<sup>+</sup>[A-Za-z]<sup>*</sup></code> |`aA`     |
 
 ### 🧩 Símbolos
 | Token         | Símbolo |
@@ -117,7 +117,7 @@
 |-------------------------------------------------------------------------------------------------------------------------------|
 | `bloco` → `declaracao bloco` \| `atribuicao bloco` \| `quest bloco` \| `enlace bloco` \| `quebra bloco` \| `ciclo bloco` \| ε |
 
-| 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
+<!--| 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
 |----------------------------------------------------------|
 | `declaracao` → `tipoVar` `VARIAVEL` `valoravel` `;`      |
 | `valoravel`  → `'='` `idt` \| ε                          |
@@ -127,9 +127,18 @@
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
 | `NUM_INTEIRO` → `[0-9]+`                                 |
 | `TEXTO`       → `"` [] `"`                               |
-| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |
+| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |-->
 
-| 💠 **ATRIBUIÇÃO** 💠                                    |
+| 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
+|----------------------------------------------------------|
+| `declaracao` → `tipoVar` `VARIAVEL` `valoravel` `;`      |
+| `valoravel`  → `'='` `idt` \| ε                          |
+| `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`   |
+| `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
+| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
+| São: `idt` e `VARIAVEL`                                  |
+
+<!--| 💠 **ATRIBUIÇÃO** 💠                                    |
 |----------------------------------------------------------|
 | `atribuicao` → `VARIAVEL` `'='` `valor`                  |
 | `valor`      → `VARIAVEL` \| `idt`                       |
@@ -138,11 +147,21 @@
 | `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
 | `NUM_INTEIRO` → `[0-9]+`                                 |
 | `TEXTO`       → `"` [] `"`                               |
-| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |
+| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |-->
 
-| 💠 **INPUT** 💠                       |
-|----------------------------------------|
-| `input` → `'Inserir'` `->` `var` `';'` |
+| 💠 **ATRIBUIÇÃO** 💠                                    |
+|----------------------------------------------------------|
+| `atribuicao` → `VARIAVEL` `'='` `valor`                  |
+| `valor`      → `VARIAVEL` \| `idt`                       |
+| `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
+| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
+| São: `idt` e `VARIAVEL`                                  |
+
+| 💠 **INPUT** 💠                            |
+|---------------------------------------------|
+| `input` → `'Inserir'` `->` `VARIAVEL` `';'` |
+| 💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠    |
+| São: `idt` e `VARIAVEL`                     |
 
 | 💠 **ESTRUTURA CONDICIONAL** 💠                                                      |
 |---------------------------------------------------------------------------------------|
