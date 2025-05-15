@@ -1,12 +1,16 @@
-Destino bunda(){
+Destino bunda(Inteiro m){
     Inteiro i;
     Inserir(i);
-    Inteiro m;
     m = 6 * 6 * 6;
-
     Enlace(Roda){
         Quest(i == m && i > 15){
-            Si{Quebra;}
+            Si{
+                Exibir(i);
+                Exibir(10);
+                Exibir(9.99);
+                Exibir("bumbum");
+                Quebra;
+            }
             No{i = i + 1;}
         }
     }
