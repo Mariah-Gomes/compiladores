@@ -128,50 +128,32 @@
 ```ebnf
 bloco → declaracao bloco | atribuicao bloco | quest bloco | enlace bloco | quebra bloco | ciclo bloco | ε
 ```
+### 💠 Declaração de Variáveis 💠  
+```ebnf
+declaracao → tipoVar VARIAVEL valoravel ';'
+valoravel  → '=' idt | ε                  
+tipoVar    → 'Inteiro' | 'Decimal' | 'Texto'
+idt        → NUM_DECIMAL | NUM_INTEIRO | TEXTO
+```
+💠 **Regras Léxicas:** `VARIAVEL` e `idt`
 
-<!--| 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
-|----------------------------------------------------------|
-| `declaracao` → `tipoVar` `VARIAVEL` `valoravel` `;`      |
-| `valoravel`  → `'='` `idt` \| ε                          |
-| `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`   |
-| `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
-| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
-| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
-| `NUM_INTEIRO` → `[0-9]+`                                 |
-| `TEXTO`       → `"` [] `"`                               |
-| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |-->
-
-| 💠 **DECLARAÇÃO DE VARIÁVEIS** 💠                       |
-|----------------------------------------------------------|
-| `declaracao` → `tipoVar` `VARIAVEL` `valoravel` `;`      |
-| `valoravel`  → `'='` `idt` \| ε                          |
-| `tipoVar`    → `'Inteiro'` \| `'Decimal'` \| `'Texto'`   |
-| `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
-| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
-| São: `idt` e `VARIAVEL`                                  |
-
-<!--| 💠 **ATRIBUIÇÃO** 💠                                    |
-|----------------------------------------------------------|
-| `atribuicao` → `VARIAVEL` `'='` `valor`                  |
-| `valor`      → `VARIAVEL` \| `idt`                       |
-| `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
-| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
-| `NUM_DECIMAL` → `[0-9]+ '.' [0-9]+`                      |
-| `NUM_INTEIRO` → `[0-9]+`                                 |
-| `TEXTO`       → `"` [] `"`                               |
-| `VARIAVEL`    → `[a-z][A-Z a-z]*`                        |-->
-
-| 💠 **ATRIBUIÇÃO** 💠                                    |
-|----------------------------------------------------------|
-| `atribuicao` → `VARIAVEL` `'='` `valor`                  |
-| `valor`      → `VARIAVEL` \| `idt`                       |
-| `idt`        → `NUM_DECIMAL` \| `NUM_INTEIRO` \| `TEXTO` |
-| 💠💠💠💠💠💠💠 **REGRAS LÉXICAS** 💠💠💠💠💠💠💠  |
-| São: `idt` e `VARIAVEL`                                  |
+### 💠 Atribuição 💠  
+```ebnf
+atribuicao → VARIAVEL '=' valor            
+valor      → VARIAVEL | idt
+idt        → NUM_DECIMAL | NUM_INTEIRO | TEXTO
+```
+💠 **Regras Léxicas:** `VARIAVEL` e `idt`
 
 ### 💠 Input 💠  
 ```ebnf
 input → 'Inserir' '(' VARIAVEL ')' ';'
+```
+💠 **Regras Léxicas:** `VARIAVEL`
+
+### 💠 Print 💠  
+```ebnf
+print → 'Exibir' '(' VARIAVEL ')' ';'
 ```
 💠 **Regras Léxicas:** `VARIAVEL`
 
