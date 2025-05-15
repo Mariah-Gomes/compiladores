@@ -14,11 +14,12 @@
 
 ## 🔍 Analisador Léxico
 ### 🔤 Caracteres
-| Token          | Regra Léxica                                                                     | Exemplo     |
-|----------------|----------------------------------------------------------------------------------|-------------|
-| **NUM_DECIMAL**| <code>[0-9]<sup>+</sup></code> `'.'` <code>[0-9]<sup>+</sup></code>              | `6.6`       |
-| **NUM_INTEIRO**| <code>[0-9]<sup>+</sup></code>                                                   | `6`         |
-| **TEXTO**      | `'"'` `[a-zA-Z0-9 ]*` `SYMBOL*` `MATH_OP*` `ASSI_OP*` `COMP_OP*` `LOGI_OP*` `'"'`| `"Mariago"` |
+| Token          | Regra Léxica                                                                      | Exemplo     |
+|----------------|-----------------------------------------------------------------------------------|-------------|
+| **NUM_DECIMAL**| <code>[0-9]<sup>+</sup></code> `'.'` <code>[0-9]<sup>+</sup></code>               | `6.6`       |
+| **NUM_INTEIRO**| <code>[0-9]<sup>+</sup></code>                                                    | `6`         |
+| **TEXTO**      | `'"'` `CARACTER*` `SYMBOL*` `MATH_OP*` `ASSI_OP*` `COMP_OP*` `LOGI_OP*`  `'"'`    | `"Mariago"` |
+| **CARACTER**   | <code>[A-Za-z]<sup>+</sup></code>
 
 ### ⚙️ Operadores
 #### 📝 Atribuição
