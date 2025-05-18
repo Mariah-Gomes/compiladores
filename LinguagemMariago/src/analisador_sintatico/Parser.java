@@ -3,6 +3,7 @@ package analisador_sintatico;
 import analisador_lexico.Token;
 import arvore_sintatica_abstrata.Node;
 import arvore_sintatica_abstrata.Tree;
+import analisador_semantico.TabelaDeSimbolos;
 import java.util.List;
 
 public class Parser {

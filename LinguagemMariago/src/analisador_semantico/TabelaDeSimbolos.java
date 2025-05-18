@@ -10,7 +10,7 @@ public class TabelaDeSimbolos {
         tabela = new HashMap<>();
     }
     
-    public void inserir(String nome, String tipo, Object valor){
+    public void inserirTabela(String nome, String tipo, Object valor){
         if(!tabela.containsKey(nome)){
             tabela.put(nome, new Simbolo(nome, tipo, valor));
         }else{
@@ -19,11 +19,11 @@ public class TabelaDeSimbolos {
         }
     }
     
-    public Simbolo buscar(String nome){
+    public Simbolo buscarTabela(String nome){
         return tabela.get(nome);
     }
     
-    public boolean existe(String nome){
+    public boolean existirTabela(String nome){
         return tabela.containsKey(nome);
     }
     
