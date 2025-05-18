@@ -193,7 +193,7 @@ quebra → 'Quebra' ';'
 ```ebnf
 enlace   → 'Enlace' '(' rr ')' '{' bloco '}'                                   
 rr       → requisito | 'Roda'                                                          
-ciclo    → 'Ciclo' '(' declaracao requisito ';' atualiza ')' '{' bloco '}'
+ciclo    → 'Ciclo' '(' declaracao ';' requisito ';' atualiza ')' '{' bloco '}'
 atualiza → 'Atualiza' '(' VARIAVEL MATH_OP idt ')'                                
 idt      → NUM_DECIMAL | NUM_INTEIRO | TEXTO
 ```
