@@ -1,2 +1,1 @@
-Inteiro i;
-Inteiro i;
+Inteiro i = 50;

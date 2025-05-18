@@ -10,6 +10,7 @@ public class Parser {
     
     List<Token> tokens;
     Token token, tokenAnterior;
+    // StringBuilder exprBuilder = new StringBuilder();
     TabelaDeSimbolos tabela = new TabelaDeSimbolos();
     String nomeForT, tipoVarForT, tipoValForT;
     Object valorForT;
@@ -26,6 +27,7 @@ public class Parser {
         bloco(root);
         if(token.tipo.equals("EOF")){
             System.out.println("SINTATICAMENTE CORRETO!!!");
+            tabela.imprimirTabela();
         }else{
             erro();
         }
@@ -131,19 +133,24 @@ public class Parser {
     //DECLARAÇÃO DE VARIÁVEL
     private boolean declaracao(Node node){
         Node declaracao = node.addNode("declaracao");
-        if(tipoVar(declaracao) && matchT("VARIAVEL", declaracao)){
-            nomeForT = tokenAnterior.lexema;
-            if(token.lexema.equals("=")){
-                if(valoravel(declaracao)){
-                    if(matchL(";", declaracao)){
-                        tabela.inserirTabela(nomeForT, tipoVarForT, tipoValForT,
-                                valorForT);
-                        return true;
+        if(tipoVar(declaracao)){
+            tipoVarForT = tokenAnterior.lexema;
+            if(matchT("VARIAVEL", declaracao)){
+                nomeForT = tokenAnterior.lexema;
+                if(token.lexema.equals("=")){
+                    if(valoravel(declaracao)){
+                        tipoValForT = tokenAnterior.tipo;
+                        valorForT = tokenAnterior.lexema;
+                        if(matchL(";", declaracao)){
+                            tabela.inserirTabela(nomeForT, tipoVarForT, tipoValForT,
+                                    valorForT);
+                            return true;
+                        }
                     }
+                }else if(matchL(";", declaracao)){
+                    tabela.inserirTabela(nomeForT, tipoVarForT, null, null);
+                    return true;
                 }
-            }else if(matchL(";", declaracao)){
-                tabela.inserirTabela(nomeForT, tipoVarForT, null, null);
-                return true;
             }
         }
         return false;
@@ -152,7 +159,6 @@ public class Parser {
         Node tipoVar = node.addNode("tipoVar");
         if(matchL("Inteiro", tipoVar) || matchL("Decimal", tipoVar) ||
                 matchL("Texto", tipoVar)){
-            tipoVarForT = tokenAnterior.lexema;
             return true;
         }
         return false;
@@ -161,8 +167,6 @@ public class Parser {
         Node idt = node.addNode("idt");
         if(matchT("NUM_INTEIRO", idt) || matchT("NUM_DECIMAL", idt) ||
                 matchT("TEXTO", idt)){
-            tipoValForT = token.tipo;
-            valorForT = token.lexema;
             return true;
         }
         return false;
