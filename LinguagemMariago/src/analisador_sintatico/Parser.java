@@ -9,7 +9,10 @@ import java.util.List;
 public class Parser {
     
     List<Token> tokens;
-    Token token;
+    Token token, tokenAnterior;
+    TabelaDeSimbolos tabela = new TabelaDeSimbolos();
+    String nomeForT, tipoVarForT, tipoValForT;
+    Object valorForT;
     
     public Parser(List<Token> tokens){
         this.tokens = tokens;
@@ -31,6 +34,7 @@ public class Parser {
     
     public Token getNextToken(){
         if(tokens.size() > 0){
+            tokenAnterior = token;
             return tokens.remove(0);
         }else{
             return null;
@@ -128,13 +132,17 @@ public class Parser {
     private boolean declaracao(Node node){
         Node declaracao = node.addNode("declaracao");
         if(tipoVar(declaracao) && matchT("VARIAVEL", declaracao)){
+            nomeForT = tokenAnterior.lexema;
             if(token.lexema.equals("=")){
                 if(valoravel(declaracao)){
                     if(matchL(";", declaracao)){
+                        tabela.inserirTabela(nomeForT, tipoVarForT, tipoValForT,
+                                valorForT);
                         return true;
                     }
                 }
             }else if(matchL(";", declaracao)){
+                tabela.inserirTabela(nomeForT, tipoVarForT, null, null);
                 return true;
             }
         }
@@ -144,6 +152,7 @@ public class Parser {
         Node tipoVar = node.addNode("tipoVar");
         if(matchL("Inteiro", tipoVar) || matchL("Decimal", tipoVar) ||
                 matchL("Texto", tipoVar)){
+            tipoVarForT = tokenAnterior.lexema;
             return true;
         }
         return false;
@@ -152,6 +161,8 @@ public class Parser {
         Node idt = node.addNode("idt");
         if(matchT("NUM_INTEIRO", idt) || matchT("NUM_DECIMAL", idt) ||
                 matchT("TEXTO", idt)){
+            tipoValForT = token.tipo;
+            valorForT = token.lexema;
             return true;
         }
         return false;

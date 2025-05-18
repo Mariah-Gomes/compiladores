@@ -10,9 +10,10 @@ public class TabelaDeSimbolos {
         tabela = new HashMap<>();
     }
     
-    public void inserirTabela(String nome, String tipo, Object valor){
+    public void inserirTabela(String nome, String tipoVar, String tipoVal,
+            Object valor){
         if(!tabela.containsKey(nome)){
-            tabela.put(nome, new Simbolo(nome, tipo, valor));
+            tabela.put(nome, new Simbolo(nome, tipoVar, tipoVal, valor));
         }else{
             System.out.println("Erro: identficador '" + nome +
                     "' já declarado.");
