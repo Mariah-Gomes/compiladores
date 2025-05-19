@@ -4,13 +4,15 @@ import analisador_lexico.Token;
 import arvore_sintatica_abstrata.Node;
 import arvore_sintatica_abstrata.Tree;
 import analisador_semantico.TabelaDeSimbolos;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
     
     List<Token> tokens;
     Token token, tokenAnterior;
-    // StringBuilder exprBuilder = new StringBuilder();
+    List<String> tradutor = new ArrayList<>();
+    StringBuilder codBuilder = new StringBuilder();
     TabelaDeSimbolos tabela = new TabelaDeSimbolos();
     String nomeForT, tipoVarForT, tipoValForT;
     Object valorForT;
@@ -27,6 +29,9 @@ public class Parser {
         bloco(root);
         if(token.tipo.equals("EOF")){
             System.out.println("SINTATICAMENTE CORRETO!!!");
+            System.out.println("");
+            System.out.print(codBuilder);
+            System.out.println("");
             tabela.imprimirTabela();
         }else{
             erro();
@@ -135,20 +140,32 @@ public class Parser {
         Node declaracao = node.addNode("declaracao");
         if(tipoVar(declaracao)){
             tipoVarForT = tokenAnterior.lexema;
+            tradutor.add(tokenAnterior.lexema);
             if(matchT("VARIAVEL", declaracao)){
                 nomeForT = tokenAnterior.lexema;
+                tradutor.add(tokenAnterior.lexema);
                 if(token.lexema.equals("=")){
+                    tradutor.add(token.lexema);
                     if(valoravel(declaracao)){
                         tipoValForT = tokenAnterior.tipo;
                         valorForT = tokenAnterior.lexema;
+                        tradutor.add(tokenAnterior.lexema);
                         if(matchL(";", declaracao)){
                             tabela.inserirTabela(nomeForT, tipoVarForT, tipoValForT,
                                     valorForT);
+                            codBuilder.append("var ").append(tradutor.get(1) +
+                                    " ").append(tradutor.get(0) + " ").
+                                    append(tradutor.get(2) + " ").
+                                    append(tradutor.get(3) + "\n");
+                            tradutor.clear();
                             return true;
                         }
                     }
                 }else if(matchL(";", declaracao)){
                     tabela.inserirTabela(nomeForT, tipoVarForT, null, null);
+                    codBuilder.append("var ").append(tradutor.get(1) + " ").
+                            append(tradutor.get(0) + "\n");
+                    tradutor.clear();
                     return true;
                 }
             }
@@ -248,16 +265,29 @@ public class Parser {
     }
     private boolean atribuicao(Node node){
         Node atribuicao = node.addNode("atribuicao");
-        if(matchT("VARIAVEL", atribuicao) && matchL("=", atribuicao) &&
-                expressao(atribuicao) && matchL(";", atribuicao)){
-            return true;
+        if(matchT("VARIAVEL", atribuicao)){
+            tradutor.add(tokenAnterior.lexema);
+            if(matchL("=", atribuicao)){
+                tradutor.add(tokenAnterior.lexema);
+                if(expressao(atribuicao)){
+                    if(matchL(";", atribuicao)){
+                        for (String token : tradutor){
+                            codBuilder.append(token + " ");
+                        }
+                        codBuilder.append("\n");
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
     private boolean expressao(Node node){ // corrigir que fica aparecendo expressão toda hora
         Node expressao = node.addNode("expressao");
         if(matchT("VARIAVEL", expressao) || idt(expressao)){
+            tradutor.add(tokenAnterior.lexema);
             if(matchT("MATH_OP", expressao)){
+                tradutor.add(tokenAnterior.lexema);
                 if(expressao(expressao)){
                     return true;
                 }
