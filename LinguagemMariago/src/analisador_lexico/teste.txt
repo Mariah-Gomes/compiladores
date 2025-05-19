@@ -1,7 +1,1 @@
-Conjunto(Inteiro; bunda; Dinamico) = [1, 1, 1];
-
-Insere(bunda; Final) = "bunda+";
-
-Remove(bunda; Final);
-
-Ordenar(bunda; MenorTo);
+Inteiro i = 50;

@@ -3,12 +3,17 @@ package analisador_sintatico;
 import analisador_lexico.Token;
 import arvore_sintatica_abstrata.Node;
 import arvore_sintatica_abstrata.Tree;
+import analisador_semantico.TabelaDeSimbolos;
 import java.util.List;
 
 public class Parser {
     
     List<Token> tokens;
-    Token token;
+    Token token, tokenAnterior;
+    // StringBuilder exprBuilder = new StringBuilder();
+    TabelaDeSimbolos tabela = new TabelaDeSimbolos();
+    String nomeForT, tipoVarForT, tipoValForT;
+    Object valorForT;
     
     public Parser(List<Token> tokens){
         this.tokens = tokens;
@@ -22,6 +27,7 @@ public class Parser {
         bloco(root);
         if(token.tipo.equals("EOF")){
             System.out.println("SINTATICAMENTE CORRETO!!!");
+            tabela.imprimirTabela();
         }else{
             erro();
         }
@@ -30,6 +36,7 @@ public class Parser {
     
     public Token getNextToken(){
         if(tokens.size() > 0){
+            tokenAnterior = token;
             return tokens.remove(0);
         }else{
             return null;
@@ -126,15 +133,24 @@ public class Parser {
     //DECLARAÇÃO DE VARIÁVEL
     private boolean declaracao(Node node){
         Node declaracao = node.addNode("declaracao");
-        if(tipoVar(declaracao) && matchT("VARIAVEL", declaracao)){
-            if(token.lexema.equals("=")){
-                if(valoravel(declaracao)){
-                    if(matchL(";", declaracao)){
-                        return true;
+        if(tipoVar(declaracao)){
+            tipoVarForT = tokenAnterior.lexema;
+            if(matchT("VARIAVEL", declaracao)){
+                nomeForT = tokenAnterior.lexema;
+                if(token.lexema.equals("=")){
+                    if(valoravel(declaracao)){
+                        tipoValForT = tokenAnterior.tipo;
+                        valorForT = tokenAnterior.lexema;
+                        if(matchL(";", declaracao)){
+                            tabela.inserirTabela(nomeForT, tipoVarForT, tipoValForT,
+                                    valorForT);
+                            return true;
+                        }
                     }
+                }else if(matchL(";", declaracao)){
+                    tabela.inserirTabela(nomeForT, tipoVarForT, null, null);
+                    return true;
                 }
-            }else if(matchL(";", declaracao)){
-                return true;
             }
         }
         return false;
