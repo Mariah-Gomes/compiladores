@@ -1,3 +1,8 @@
-Inteiro i;
-Inteiro a = 20;
+Texto t = "blablabla";
+Decimal d;
+Inteiro i = 20;
 a = 1 + 2 + 3;
+Exibir(a);
+Retorna t + i * d / a;
+Quebra;
+Inserir(j);

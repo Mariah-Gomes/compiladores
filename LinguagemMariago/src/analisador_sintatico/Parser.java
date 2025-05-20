@@ -26,8 +26,11 @@ public class Parser {
         Node root = new Node("main");
         Tree tree = new Tree(root);
         tree.setRoot(root);
+        codBuilder.append("package main\n").append("import \"fmt\"\n").
+                append("func main(){\n");
         bloco(root);
         if(token.tipo.equals("EOF")){
+            codBuilder.append("}\n");
             System.out.println("SINTATICAMENTE CORRETO!!!");
             System.out.println("");
             System.out.print(codBuilder);
@@ -134,13 +137,24 @@ public class Parser {
         return false;
     }
     
+    private String tipoVarTipoVar(String tipoVar){
+        if(tipoVar.equals("Inteiro")){
+            return "int";
+        }else if(tipoVar.equals("Decimal")){
+            return "float";
+        }else if(tipoVar.equals("Texto")){
+            return "string";
+        }
+        return null;
+    }
+    
     //---------------
     //DECLARAÇÃO DE VARIÁVEL
     private boolean declaracao(Node node){
         Node declaracao = node.addNode("declaracao");
         if(tipoVar(declaracao)){
             tipoVarForT = tokenAnterior.lexema;
-            tradutor.add(tokenAnterior.lexema);
+            tradutor.add(tipoVarTipoVar(tokenAnterior.lexema)); // já converte direto
             if(matchT("VARIAVEL", declaracao)){
                 nomeForT = tokenAnterior.lexema;
                 tradutor.add(tokenAnterior.lexema);
@@ -275,6 +289,7 @@ public class Parser {
                             codBuilder.append(token + " ");
                         }
                         codBuilder.append("\n");
+                        tradutor.clear();
                         return true;
                     }
                 }
@@ -342,6 +357,7 @@ public class Parser {
     private boolean quebra(Node node){
         Node quebra = node.addNode("quebra");
         if(matchL("Quebra", quebra) && matchL(";", quebra)){
+            codBuilder.append("break\n");
             return true;
         }
         return false;
@@ -408,9 +424,18 @@ public class Parser {
     }
     private boolean retorna(Node node){
         Node retorna = node.addNode("retorna");
-        if(matchL("Retorna", retorna) && expressao(retorna) && 
-                matchL(";", retorna)){
-            return true;
+        if(matchL("Retorna", retorna)){
+            tradutor.add("return");
+            if(expressao(retorna)){
+                if(matchL(";", retorna)){
+                    for (String token : tradutor){
+                        codBuilder.append(token + " ");
+                    }
+                    codBuilder.append("\n");
+                    tradutor.clear();
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -446,10 +471,16 @@ public class Parser {
     //INSERIR
     private boolean inserir(Node node){
         Node inserir = node.addNode("inserir");
-        if(matchL("Inserir", inserir) && matchL("(", inserir) &&
-                matchT("VARIAVEL", inserir) && matchL(")", inserir) &&
-                matchL(";", inserir)){
-            return true;
+        if(matchL("Inserir", inserir) && matchL("(", inserir)){
+            if(matchT("VARIAVEL", inserir)){
+                tradutor.add(tokenAnterior.lexema);
+                if(matchL(")", inserir) && matchL(";", inserir)){
+                    codBuilder.append("fmt.Scanln(&").append(tradutor.get(0)).
+                            append(")\n");
+                    tradutor.clear();
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -459,10 +490,16 @@ public class Parser {
     //EXIBIR
     private boolean exibir(Node node){
         Node exibir = node.addNode("exibir");
-        if(matchL("Exibir", exibir) && matchL("(", exibir) &&
-                (matchT("VARIAVEL", exibir) || idt(exibir)) && 
-                matchL(")", exibir) && matchL(";", exibir)){
-            return true;
+        if(matchL("Exibir", exibir) && matchL("(", exibir)){
+            if(matchT("VARIAVEL", exibir) || idt(exibir)){
+                tradutor.add(tokenAnterior.lexema);
+                if(matchL(")", exibir) && matchL(";", exibir)){
+                    codBuilder.append("fmt.Println(").append(tradutor.get(0)).
+                            append(")\n");
+                    tradutor.clear();
+                    return true;
+                }
+            }
         }
         return false;
     }
