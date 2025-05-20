@@ -1,8 +1,6 @@
-Texto t = "blablabla";
-Decimal d;
-Inteiro i = 20;
-a = 1 + 2 + 3;
-Exibir(a);
-Retorna t + i * d / a;
-Quebra;
-Inserir(j);
+Quest(x < 10 && y > 10){
+    Si{a = 1 + 2 + 3;}
+}Request(z == 10){
+    Si{Exibir("Banana");}
+    No{Exibir("Banana");}
+}

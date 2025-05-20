@@ -215,12 +215,26 @@ public class Parser {
     //ESTRUTURA CONDICIONAL
     private boolean quest(Node node){
         Node quest = node.addNode("quest");
-        if(matchL("Quest", quest) && matchL("(", quest) && requisito(quest) &&
-                matchL(")", quest) && matchL("{", quest) && sn(quest) &&
-                matchL("}", quest)){
-            if(token.lexema.equals("Request")){
-                if(request(quest)){
-                return true;
+        if(matchL("Quest", quest) && matchL("(", quest)){
+            codBuilder.append("if ");
+            if(requisito(quest)){
+                for (String token : tradutor){
+                    codBuilder.append(token + " ");
+                }
+                tradutor.clear();
+                if(matchL(")", quest) && matchL("{", quest)){
+                    codBuilder.append("{\n");
+                    if(sn(quest) && matchL("}", quest)){
+                        codBuilder.append("}");
+                        if(token.lexema.equals("Request")){
+                            if(request(quest)){
+                                codBuilder.append("\n");
+                                return true;
+                            }
+                        }
+                        codBuilder.append("\n");
+                        return true;
+                    }
                 }
             }
         }
@@ -228,15 +242,22 @@ public class Parser {
     }
     private boolean requisito(Node node){
         Node requisito = node.addNode("requisito");
-        if(matchT("VARIAVEL", requisito) && matchT("COMP_OP", requisito) &&
-                (matchT("VARIAVEL", requisito) || idt(requisito))){
-            if(matchT("LOGI_OP", requisito)){
-                if(requisito(requisito)){
+        if(matchT("VARIAVEL", requisito)){
+            tradutor.add(tokenAnterior.lexema);
+            if(matchT("COMP_OP", requisito)){
+                tradutor.add(tokenAnterior.lexema);
+                if(matchT("VARIAVEL", requisito) || idt(requisito)){
+                    tradutor.add(tokenAnterior.lexema);
+                    if(matchT("LOGI_OP", requisito)){
+                        tradutor.add(tokenAnterior.lexema);
+                        if(requisito(requisito)){
+                            return true;
+                        }
+                        return false;
+                    }
                     return true;
                 }
-                return false;
             }
-            return true;
         }
         return false;
     }
@@ -262,8 +283,11 @@ public class Parser {
     }
     private boolean no(Node node){
         Node no = node.addNode("no");
-        if(matchL("No", no) && matchL("{", no) && bloco(no) && matchL("}", no)){
-            return true;
+        if(matchL("No", no) && matchL("{", no)){
+            codBuilder.append("} else {\n");
+            if(bloco(no) && matchL("}", no)){
+                return true;
+            }
         }
         return false;
     }
@@ -314,13 +338,22 @@ public class Parser {
     }
     private boolean request(Node node){
         Node request = node.addNode("request");
-        if(matchL("Request", request)){
-            if(matchL("(", request) && requisito(request) &&
-                    matchL(")", request) && matchL("{", request) &&
-                    sn(request) && matchL("}", request)){
-                if(token.lexema.equals("Request")){
-                    if(request(request)){
-                        return true;
+        if(matchL("Request", request) && matchL("(", request)){
+            codBuilder.append(" else if ");
+            if(requisito(request)){
+                for (String token : tradutor){
+                    codBuilder.append(token + " ");
+                }
+                tradutor.clear();
+                if(matchL(")", request) && matchL("{", request)){
+                    codBuilder.append("{\n");
+                    if(sn(request) && matchL("}", request)){
+                        codBuilder.append("}");
+                        if(token.lexema.equals("Request")){
+                            if(request(request)){
+                                return true;
+                            }
+                        }
                     }
                 }
             }
