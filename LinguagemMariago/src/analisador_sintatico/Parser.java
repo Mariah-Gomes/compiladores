@@ -620,13 +620,36 @@ public class Parser {
     private boolean conjunto(Node node){
         Node conjunto = node.addNode("conjunto");
         if(matchL("Conjunto", conjunto) && matchL("(", conjunto) &&
-                tipoVar(conjunto) && matchL(";", conjunto) &&
-                matchT("VARIAVEL", conjunto) && matchL(";", conjunto) &&
-                tamanho(conjunto) && matchL(")", conjunto) &&
-                matchL("=", conjunto) && matchL("[", conjunto) &&
-                pd(conjunto, "dentro") && matchL("]", conjunto) &&
-                matchL(";", conjunto)){
-            return true;
+                tipoVar(conjunto)){
+            tradutor.add(tokenAnterior.lexema);
+            if(matchL(";", conjunto) && matchT("VARIAVEL", conjunto)){
+                tradutor.add(tokenAnterior.lexema);
+                if(matchL(";", conjunto) && tamanho(conjunto)){
+                    if(tokenAnterior.lexema.equals("Dinamico")){
+                        codBuilder.append(tradutor.get(1)).append(" := []").
+                                append(tipoVarTipoVar(tradutor.get(0)) + "{");
+                        if(matchL(")", conjunto) && matchL("=", conjunto) &&
+                            matchL("[", conjunto) && pd(conjunto, "dentro") &&
+                            matchL("]", conjunto) &&matchL(";", conjunto)){
+                            codBuilder.append("}\n");
+                            tradutor.clear();
+                            return true;
+                        }
+                    }else{
+                        tradutor.add(tokenAnterior.lexema);
+                        codBuilder.append(tradutor.get(1)).append(" := [").
+                                append(tradutor.get(2) + "]").
+                                append(tipoVarTipoVar(tradutor.get(0)) + "{");
+                        if(matchL(")", conjunto) && matchL("=", conjunto) &&
+                                matchL("[", conjunto) && pd(conjunto, "dentro")
+                                && matchL("]", conjunto) &&matchL(";", conjunto)){
+                            codBuilder.append("}\n");
+                            tradutor.clear();
+                            return true;
+                        }
+                    }
+                }
+            }
         }
         return false;
     }
