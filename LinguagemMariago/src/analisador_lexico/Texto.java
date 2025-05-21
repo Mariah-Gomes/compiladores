@@ -14,7 +14,7 @@ public class Texto extends AFD{
         if(code.current() == '"'){
             code.next();
         }
-        return texto;
+        return '"' + texto + '"';
     }
 
     @Override
