@@ -1,3 +1,5 @@
-Ciclo(Inteiro i = 0; i < 10; Atualiza(i + 1)){
-    a = 1 + 2 + 3;
+Destino a (Texto b){
+    Retorna b;
 }
+
+D a("Vrau");

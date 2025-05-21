@@ -457,25 +457,46 @@ public class Parser {
     //DESTINO
     private boolean destino(Node node){
         Node destino = node.addNode("destino");
-        if(matchL("Destino", destino) && matchT("VARIAVEL", destino) &&
-                matchL("(", destino) && parametro(destino) && 
-                matchL(")", destino) && matchL("{", destino) && bloco(destino)
-                && matchL("}", destino)){
-            return true;
+        if(matchL("Destino", destino) && matchT("VARIAVEL", destino)){
+            codBuilder.append("func ");
+            codBuilder.append(tokenAnterior.lexema);
+            if(matchL("(", destino)){
+                codBuilder.append(" (");
+                if(parametro(destino)){
+                    if(matchL(")", destino)){
+                        codBuilder.append(") ");
+                        codBuilder.append("any");
+                        if(matchL("{", destino)){
+                            codBuilder.append(" {\n");
+                            if(bloco(destino) && matchL("}", destino)){
+                                codBuilder.append("}\n");
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
         }
         return false;
     }
     private boolean parametro(Node node){
         if(simpleTipoVar()){
             Node parametro = node.addNode("parametro");
-            if(tipoVar(parametro) && matchT("VARIAVEL", parametro)){
-                if(matchL(",", parametro)){
-                    if(parametro(parametro)){
-                        return true;
+            if(tipoVar(parametro)){
+                tradutor.add(tokenAnterior.lexema);
+                if(matchT("VARIAVEL", parametro)){
+                    tradutor.add(tokenAnterior.lexema);
+                    codBuilder.append(tradutor.get(1) + " ");
+                    codBuilder.append(tipoVarTipoVar(tradutor.get(0)));
+                    tradutor.clear();
+                    if(matchL(",", parametro)){
+                        if(parametro(parametro)){
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
+                    return true;
                 }
-                return true;
             }
             return false;
         }
@@ -507,10 +528,15 @@ public class Parser {
     }
     private boolean destinando(Node node){
         Node destinando = node.addNode("destinando");
-        if(matchL("D", destinando) && matchT("VARIAVEL", destinando) &&
-                matchL("(", destinando) && pd(destinando, "parametrizando") &&
-                matchL(")", destinando) &&matchL(";", destinando)){
-            return true;
+        if(matchL("D", destinando) && matchT("VARIAVEL", destinando)){
+            codBuilder.append(tokenAnterior.lexema + " ");
+            if(matchL("(", destinando)){
+                codBuilder.append(tokenAnterior.lexema);
+                if(pd(destinando, "parametrizando") && matchL(")", destinando)
+                        && matchL(";", destinando)){
+                    codBuilder.append(")\n");
+                }
+            }
         }
         return false;
     }
@@ -519,7 +545,9 @@ public class Parser {
                 token.tipo.equals("NUM_DECIMAL") || token.tipo.equals("TEXTO")){
             Node pdpd = node.addNode(qual);
             if(matchT("VARIAVEL", pdpd) || idt(pdpd)){
+                codBuilder.append(tokenAnterior.lexema);
                 if(matchL(",", pdpd)){
+                    codBuilder.append(tokenAnterior.lexema);
                     if(pd(pdpd, qual)){
                         return true;
                     }
