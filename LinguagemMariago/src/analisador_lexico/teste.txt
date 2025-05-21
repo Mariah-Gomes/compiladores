@@ -1,6 +1,4 @@
-Quest(x < 10 && y > 10){
-    Si{a = 1 + 2 + 3;}
-}Request(z == 10){
-    Si{Exibir("Banana");}
-    No{Exibir("Banana");}
+Enlace(x < 10){
+    a = 1 + 2 + 3;
+    Exibir("bunda");
 }

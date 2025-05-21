@@ -367,10 +367,20 @@ public class Parser {
     //ENLACE
     private boolean enlace(Node node){
         Node enlace = node.addNode("enlace");
-        if(matchL("Enlace", enlace) && matchL("(", enlace) && rr(enlace) &&
-                matchL(")", enlace) && matchL("{", enlace) && bloco(enlace) &&
-                matchL("}", enlace)){
-            return true;
+        if(matchL("Enlace", enlace) && matchL("(", enlace)){
+            codBuilder.append("for ");
+            if(rr(enlace) && matchL(")", enlace)){
+                for (String token : tradutor){
+                    codBuilder.append(token + " ");
+                }
+                tradutor.clear();
+                codBuilder.append("{\n");
+                if(matchL("{", enlace) && bloco(enlace) 
+                        && matchL("}", enlace)){
+                    codBuilder.append("}\n");
+                    return true;
+                }
+            }
         }
         return false;
     }
