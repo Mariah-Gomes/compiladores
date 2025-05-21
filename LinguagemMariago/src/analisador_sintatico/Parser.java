@@ -666,7 +666,7 @@ public class Parser {
                 matchT("VARIAVEL", insere)){
             tradutor.add(tokenAnterior.lexema);
             if(matchL(";", insere) && index(insere)){
-                if(tokenAnterior.lexema.equals("Inicio")){
+                if(tokenAnterior.lexema.equals("Final")){
                     if(matchL(")", insere) && matchL("=", insere) && idt(insere)){
                         tradutor.add(tokenAnterior.lexema);
                         if(matchL(";", insere)){
@@ -679,7 +679,7 @@ public class Parser {
                             return true;
                         }
                     }
-                }else if(tokenAnterior.lexema.equals("Final")){
+                }else if(tokenAnterior.lexema.equals("Inicio")){
                     if(matchL(")", insere) && matchL("=", insere) && idt(insere)){
                         tradutor.add(tokenAnterior.lexema);
                         if(tokenAnterior.tipo.equals("NUM_INTEIRO")){
