@@ -1,19 +1,15 @@
-Inteiro i = 10;
-Inteiro ii = 10;
-i = i + ii;
-Quest(i == 20){
-    Si{
-        i = 10;
-        Exibir("Primeiro if");
-    }
-}
-Enlace(Roda){
-    Quest(i == 5){
+Destino a(Inteiro i){
+    Quest(i < 5){
         Si{
-            Quebra;
+            Exibir(i);
+            Retorna i;
         }
     }
-    Exibir("if");
-    i = i - 1;
+    Exibir(i);
+    i = i - 1; 
+    Retorna D a(i);
 }
-Exibir("Funcionou pohaaaa!!!!!!!");
+
+Destino main(){
+    D a(10);
+}

@@ -26,11 +26,9 @@ public class Parser {
         Node root = new Node("main");
         Tree tree = new Tree(root);
         tree.setRoot(root);
-        codBuilder.append("package main\n").append("import \"fmt\"\n").
-                append("func main(){\n");
+        codBuilder.append("package main\n").append("import \"fmt\"\n");
         bloco(root);
         if(token.tipo.equals("EOF")){
-            codBuilder.append("}\n");
             System.out.println("SINTATICAMENTE CORRETO!!!");
             System.out.println("");
             System.out.print(codBuilder);
@@ -460,17 +458,35 @@ public class Parser {
         if(matchL("Destino", destino) && matchT("VARIAVEL", destino)){
             codBuilder.append("func ");
             codBuilder.append(tokenAnterior.lexema);
-            if(matchL("(", destino)){
-                codBuilder.append(" (");
-                if(parametro(destino)){
-                    if(matchL(")", destino)){
-                        codBuilder.append(") ");
-                        codBuilder.append("any");
-                        if(matchL("{", destino)){
-                            codBuilder.append(" {\n");
-                            if(bloco(destino) && matchL("}", destino)){
-                                codBuilder.append("}\n");
-                                return true;
+            if(tokenAnterior.lexema.equals("main")){
+                if(matchL("(", destino)){
+                    codBuilder.append("(");
+                    if(parametro(destino)){
+                        if(matchL(")", destino)){
+                            codBuilder.append(")");
+                            if(matchL("{", destino)){
+                                codBuilder.append(" {\n");
+                                if(bloco(destino) && matchL("}", destino)){
+                                    codBuilder.append("}\n");
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                if(matchL("(", destino)){
+                    codBuilder.append("(");
+                    if(parametro(destino)){
+                        if(matchL(")", destino)){
+                            codBuilder.append(") ");
+                            codBuilder.append("any");
+                            if(matchL("{", destino)){
+                                codBuilder.append(" {\n");
+                                if(bloco(destino) && matchL("}", destino)){
+                                    codBuilder.append("}\n");
+                                    return true;
+                                }
                             }
                         }
                     }
@@ -512,8 +528,8 @@ public class Parser {
     private boolean retorna(Node node){
         Node retorna = node.addNode("retorna");
         if(matchL("Retorna", retorna)){
-            tradutor.add("return");
-            if(expressao(retorna)){
+            codBuilder.append("return ");
+            if(expressao(retorna) || destinando(retorna)){
                 if(matchL(";", retorna)){
                     for (String token : tradutor){
                         codBuilder.append(token + " ");
@@ -529,7 +545,7 @@ public class Parser {
     private boolean destinando(Node node){
         Node destinando = node.addNode("destinando");
         if(matchL("D", destinando) && matchT("VARIAVEL", destinando)){
-            codBuilder.append(tokenAnterior.lexema + " ");
+            codBuilder.append(tokenAnterior.lexema);
             if(matchL("(", destinando)){
                 codBuilder.append(tokenAnterior.lexema);
                 if(pd(destinando, "parametrizando") && matchL(")", destinando)
