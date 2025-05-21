@@ -19,4 +19,11 @@ Destino main(){
     Exibir(c);
     Exibir(d);
 
+    Remove(b; Inicio);
+    Exibir(b);
+    Remove(b; Final);
+    Exibir(b);
+    Remove(b; 2);
+    Exibir(b);
+
 }

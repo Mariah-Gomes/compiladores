@@ -726,9 +726,39 @@ public class Parser {
     private boolean remove(Node node){
         Node remove = node.addNode("remove");
         if(matchL("Remove", remove) && matchL("(", remove) &&
-                matchT("VARIAVEL", remove) && matchL(";", remove) &&
-                index(remove) && matchL(")", remove) && matchL(";", remove)){
-            return true;
+                matchT("VARIAVEL", remove)){
+            tradutor.add(tokenAnterior.lexema);
+            if(matchL(";", remove) && index(remove)){
+                if(tokenAnterior.lexema.equals("Inicio")){
+                    if(matchL(")", remove) && matchL(";", remove)){
+                        codBuilder.append(tradutor.get(0) + " = " +
+                                tradutor.get(0) + "[1:]");
+                        codBuilder.append("\n");
+                        tradutor.clear();
+                        return true;
+                    }
+                }else if(tokenAnterior.lexema.equals("Final")){
+                    if(matchL(")", remove) && matchL(";", remove)){
+                        codBuilder.append(tradutor.get(0) + " = " +
+                                tradutor.get(0) + "[:len(" + tradutor.get(0) +
+                                ")-1]");
+                        codBuilder.append("\n");
+                        tradutor.clear();
+                        return true;
+                    }
+                }else{
+                    tradutor.add(tokenAnterior.lexema);
+                    if(matchL(")", remove) && matchL(";", remove)){
+                        codBuilder.append(tradutor.get(0) + " = " + "append(" +
+                                tradutor.get(0) + "[:" + tradutor.get(1) + "], " + 
+                                tradutor.get(0) + "[" + tradutor.get(1) + 
+                                "+1:]...)");
+                        codBuilder.append("\n");
+                        tradutor.clear();
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
