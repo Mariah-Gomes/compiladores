@@ -139,7 +139,7 @@ public class Parser {
         if(tipoVar.equals("Inteiro")){
             return "int";
         }else if(tipoVar.equals("Decimal")){
-            return "float";
+            return "float64";
         }else if(tipoVar.equals("Texto")){
             return "string";
         }
@@ -663,10 +663,55 @@ public class Parser {
     private boolean insere(Node node){
         Node insere = node.addNode("insere");
         if(matchL("Insere", insere) && matchL("(", insere) &&
-                matchT("VARIAVEL", insere) && matchL(";", insere) &&
-                index(insere) && matchL(")", insere) && matchL("=", insere) &&
-                idt(insere) && matchL(";", insere)){
-            return true;
+                matchT("VARIAVEL", insere)){
+            tradutor.add(tokenAnterior.lexema);
+            if(matchL(";", insere) && index(insere)){
+                if(tokenAnterior.lexema.equals("Inicio")){
+                    if(matchL(")", insere) && matchL("=", insere) && idt(insere)){
+                        tradutor.add(tokenAnterior.lexema);
+                        if(matchL(";", insere)){
+                            codBuilder.append(tradutor.get(0)).
+                                    append(" = append(").
+                                    append(tradutor.get(0) + ", ").
+                                    append(tradutor.get(1) + ")");
+                            codBuilder.append("\n");
+                            tradutor.clear();
+                            return true;
+                        }
+                    }
+                }else if(tokenAnterior.lexema.equals("Final")){
+                    if(matchL(")", insere) && matchL("=", insere) && idt(insere)){
+                        tradutor.add(tokenAnterior.lexema);
+                        if(tokenAnterior.tipo.equals("NUM_INTEIRO")){
+                            tradutor.add("int");
+                        }else if(tokenAnterior.tipo.equals("NUM_DECIMAL")){
+                            tradutor.add("float64");
+                        }else if(tokenAnterior.tipo.equals("TEXTO")){
+                            tradutor.add("string");
+                        }
+                        if(matchL(";", insere)){
+                            codBuilder.append(tradutor.get(0) + " = append([]" +
+                                    tradutor.get(2) + "{" + tradutor.get(1) +
+                                    "}, " + tradutor.get(0) + "...)");
+                            codBuilder.append("\n");
+                            tradutor.clear();
+                            return true;
+                        }
+                    }
+                }else{
+                    tradutor.add(tokenAnterior.lexema);
+                    if(matchL(")", insere) && matchL("=", insere) && idt(insere)){
+                        tradutor.add(tokenAnterior.lexema);
+                        if(matchL(";", insere)){
+                            codBuilder.append(tradutor.get(0) + "[" +
+                                    tradutor.get(1) + "] = " + tradutor.get(2));
+                            codBuilder.append("\n");
+                            tradutor.clear();
+                            return true;
+                        }
+                    }
+                }
+            }
         }
         return false;
     }

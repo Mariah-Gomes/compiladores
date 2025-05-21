@@ -1,4 +1,22 @@
-Conjunto(Inteiro; a; Dinamico) = [];
-Conjunto(Inteiro; a; Dinamico) = [1,1,1,1,1];
-Conjunto(Inteiro; a; 5) = [];
-Conjunto(Inteiro; a; 5) = [1,1,1,1,1];
+Destino main(){
+
+    Conjunto(Inteiro; c; 5) = [];
+    Conjunto(Inteiro; d; 5) = [1,1,1,1,1];
+
+    Conjunto(Inteiro; a; Dinamico) = [];
+    Conjunto(Inteiro; b; Dinamico) = [1,1,1,1,1];
+
+    Insere(a; Inicio) = 2;
+    Insere(a; Final) = 2;
+    Insere(b; 2) = 2;
+    Insere(b; Inicio) = 2;
+    Insere(b; Final) = 2;
+    Insere(c; 2) = 3;
+    Insere(d; 2) = 4;
+
+    Exibir(a);
+    Exibir(b);
+    Exibir(c);
+    Exibir(d);
+
+}
