@@ -411,20 +411,43 @@ public class Parser {
     //CICLO
     private boolean ciclo(Node node){
         Node ciclo = node.addNode("ciclo");
-        if(matchL("Ciclo", ciclo) && matchL("(", ciclo) && declaracao(ciclo) &&
-                requisito(ciclo) && matchL(";", ciclo) && atualiza(ciclo) &&
-                matchL(")", ciclo) && matchL("{", ciclo) && bloco(ciclo) &&
-                matchL("}", ciclo)){
-            return true;
+        if(matchL("Ciclo", ciclo) && matchL("(", ciclo) && declaracao(ciclo)){
+            codBuilder.append("for ; ");
+            if(requisito(ciclo) && matchL(";", ciclo)){
+                for (String token : tradutor){
+                    codBuilder.append(token + " ");
+                }
+                codBuilder.append("; ");
+                tradutor.clear();
+                if(atualiza(ciclo) && matchL(")", ciclo) && matchL("{", ciclo)){
+                    codBuilder.append("{\n");
+                    if(bloco(ciclo) && matchL("}", ciclo)){
+                        codBuilder.append("}\n");
+                    }
+                }
+            }
         }
         return false;
     }
     private boolean atualiza(Node node){
         Node atualiza = node.addNode("atualiza");
         if(matchL("Atualiza", atualiza) && matchL("(", atualiza) &&
-                matchT("VARIAVEL", atualiza) && matchT("MATH_OP", atualiza) &&
-                idt(atualiza) && matchL(")", atualiza)){
-            return true;
+                matchT("VARIAVEL", atualiza)){
+            tradutor.add(tokenAnterior.lexema);
+            if(matchT("MATH_OP", atualiza)){
+                tradutor.add(tokenAnterior.lexema);
+                if(idt(atualiza)){
+                    tradutor.add(tokenAnterior.lexema);
+                    if(matchL(")", atualiza)){
+                        codBuilder.append(tradutor.get(0) + " = ");
+                        for (String token : tradutor){
+                            codBuilder.append(token + " ");
+                        }
+                        tradutor.clear();
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
