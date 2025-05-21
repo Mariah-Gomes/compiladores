@@ -26,7 +26,8 @@ public class Parser {
         Node root = new Node("main");
         Tree tree = new Tree(root);
         tree.setRoot(root);
-        codBuilder.append("package main\n").append("import \"fmt\"\n");
+        codBuilder.append("package main\n").append("import \"fmt\"\n").
+                append("import \"sort\"\n");
         bloco(root);
         if(token.tipo.equals("EOF")){
             System.out.println("SINTATICAMENTE CORRETO!!!");
@@ -465,7 +466,9 @@ public class Parser {
                         if(matchL(")", destino)){
                             codBuilder.append(")");
                             if(matchL("{", destino)){
-                                codBuilder.append(" {\n");
+                                codBuilder.append(" {\n").
+                                        append("fmt.Println(\" \")\n"). // PARA EVITAR ERRO COM A IMPORÇÃO
+                                        append("sort.Ints([]int{1, 2, 3})\n"); // PARA EVITAR ERRO COM A IMPORÇÃO
                                 if(bloco(destino) && matchL("}", destino)){
                                     codBuilder.append("}\n");
                                     return true;
