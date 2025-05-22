@@ -19,10 +19,12 @@ public class TabelaDeSimbolos {
                     (tipoVar.equals("Texto") && tipoVal.equals("TEXTO"))){
                 tabela.put(nome, new Simbolo(nome, tipoVar, tipoVal));
             }else{
+                System.out.println("");
                 System.out.println("Erro: valor da variavel '" + nome +
                         "' nao condiz com o tipo declarado.");
             }
         }else{
+            System.out.println("");
             System.out.println("Erro: identficador '" + nome +
                     "' já declarado.");
         }
@@ -34,6 +36,7 @@ public class TabelaDeSimbolos {
     
     public boolean existirTabela(String nome){
         if(!tabela.containsKey(nome)){
+            System.out.println("");
             System.out.println("Erro: identficador '" + nome +
                     "' nao declarado.");
             return false;
@@ -44,23 +47,27 @@ public class TabelaDeSimbolos {
     public boolean mesmoTipo(String nome, String tipoVar, List<Object> tipoVal){
         for(Object objeto : tipoVal){
             if(objeto == null){
+                System.out.println("");
                 System.out.println("Erro: valores atribuidos nao condizem com o "
                     + "tipo de variavel declarada.");
                 return false;
             }else if(tipoVar.equals("Inteiro")){
                 if(!objeto.equals("NUM_INTEIRO")){
+                    System.out.println("");
                     System.out.println("Erro: valores atribuidos nao condizem com o "
                     + "tipo de variavel declarada.");
                     return false;
                 }
             }else if(tipoVar.equals("Decimal")){
                 if(!objeto.equals("NUM_DECIMAL")){
+                    System.out.println("");
                     System.out.println("Erro: valores atribuidos nao condizem com o "
                     + "tipo de variavel declarada.");
                     return false;
                 }
             }else if(tipoVar.equals("Texto")){
                 if(!objeto.equals("TEXTO")){
+                    System.out.println("");
                     System.out.println("Erro: valores atribuidos nao condizem com o "
                     + "tipo de variavel declarada.");
                     return false;

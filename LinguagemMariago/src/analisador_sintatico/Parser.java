@@ -5,8 +5,13 @@ import analisador_semantico.Simbolo;
 import arvore_sintatica_abstrata.Node;
 import arvore_sintatica_abstrata.Tree;
 import analisador_semantico.TabelaDeSimbolos;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Parser {
     
@@ -31,14 +36,28 @@ public class Parser {
                 append("import \"sort\"\n");
         bloco(root);
         if(token.tipo.equals("EOF")){
+            System.out.println("");
             System.out.println("SINTATICAMENTE CORRETO!!!");
             System.out.println("");
             System.out.print(codBuilder);
             System.out.println("");
             tabela.imprimirTabela();
+            System.out.println("");
+            String codigoGo = codBuilder.toString();
+            try {
+                Files.write(Paths.get("gerado.go"), codigoGo.getBytes()); // Escreve o conteúdo no arquivo "gerado.go"
+                Process processo = Runtime.getRuntime().exec("go run gerado.go"); // Executa o código Go usando o terminal
+                processo.waitFor(); // Espera o processo terminar
+                new java.util.Scanner(processo.getInputStream()).useDelimiter("\\A") // Imprime a saída do processo
+                    .forEachRemaining(System.out::println);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }else{
             erro();
         }
+        System.out.println("");
+        System.out.println("");
         return tree;
     }
     
