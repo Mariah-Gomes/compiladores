@@ -61,8 +61,6 @@ public class Parser {
         }else{
             erro();
         }
-        System.out.println("");
-        System.out.println("");
         return tree;
     }
     

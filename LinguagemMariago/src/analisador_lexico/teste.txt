@@ -1,6 +1,4 @@
 Destino main(){
-    Exibir("Digite algo: ");
-    Texto t;
-    Inserir(t);
-    Exibir(t);
+    Exibir("Hello World!");
+    Inteiro i = 20;
 }
