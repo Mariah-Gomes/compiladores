@@ -1,3 +1,6 @@
 Destino main(){
-    Exibir("Hello World!");
+    Exibir("Digite algo: ");
+    Texto t;
+    Inserir(t);
+    Exibir(t);
 }
