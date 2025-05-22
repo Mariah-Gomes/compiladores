@@ -2,7 +2,7 @@ package arvore_sintatica_abstrata;
 
 public class Tree {
     
-    Node root;
+    public Node root;
 
     public Tree() {
     }

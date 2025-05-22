@@ -1,0 +1,13 @@
+Inteiro i = 8;
+Inteiro a;
+a = a + 1;
+Inteiro b;
+Inserir(b);
+Exibir(a);
+Exibir(6);
+Quest(x == 10){
+    Si{Exibir("Tudo certo!");}
+}Request(x > 10){
+    Si{x = x - 1;}
+    No{x = x + 1;}
+}
