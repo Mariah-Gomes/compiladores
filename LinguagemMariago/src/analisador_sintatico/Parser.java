@@ -768,10 +768,46 @@ public class Parser {
     private boolean ordenar(Node node){
         Node ordenar = node.addNode("ordenar");
         if(matchL("Ordenar", ordenar) && matchL("(", ordenar) &&
-                matchT("VARIAVEL", ordenar) && matchL(";", ordenar) &&
-                tipoORD(ordenar) && matchL(")", ordenar) &&
-                matchL(";", ordenar)){
-            return true;
+                tipoVar(ordenar)){ // NOVO!!! ARRUMAR NO GITHUB DEPOIS
+            tradutor.add(tokenAnterior.lexema);
+            if(matchL(";", ordenar) && matchT("VARIAVEL", ordenar)){
+                tradutor.add(tokenAnterior.lexema);
+                if(matchL(";", ordenar) && tipoORD(ordenar)){
+                    if(tokenAnterior.lexema.equals("MenorTo")){
+                        if(matchL(")", ordenar) && matchL(";", ordenar)){
+                            if(tradutor.get(0).equals("Inteiro")){
+                                codBuilder.append("sort.Ints(" + tradutor.get(1) + 
+                                        ")");
+                            }else if(tradutor.get(0).equals("Decimal")){
+                                codBuilder.append("sort.Float64s(" + tradutor.get(1) + 
+                                        ")");
+                            }else if(tradutor.get(0).equals("Texto")){
+                                codBuilder.append("sort.Strings(" + tradutor.get(1) + 
+                                        ")");
+                            }
+                            codBuilder.append("\n");
+                            tradutor.clear();
+                            return true;
+                        }
+                    }else if(tokenAnterior.lexema.equals("MaiorTo")){
+                        if(matchL(")", ordenar) && matchL(";", ordenar)){
+                            if(tradutor.get(0).equals("Inteiro")){
+                                codBuilder.append("sort.Sort(sort.Reverse(sort.IntSlice(" + 
+                                        tradutor.get(1) + ")))");
+                            }else if(tradutor.get(0).equals("Decimal")){
+                                codBuilder.append("sort.Sort(sort.Reverse(sort.Float64Slice(" + 
+                                        tradutor.get(1) + ")))");
+                            }else if(tradutor.get(0).equals("Texto")){
+                                codBuilder.append("sort.Sort(sort.Reverse(sort.StringSlice(" + 
+                                        tradutor.get(1) + ")))");
+                            }
+                            codBuilder.append("\n");
+                            tradutor.clear();
+                            return true;
+                        }
+                    }
+                }
+            }
         }
         return false;
     }
