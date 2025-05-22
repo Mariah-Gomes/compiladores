@@ -44,6 +44,9 @@ public class Parser {
             tabela.imprimirTabela();
             System.out.println("");
             String codigoGo = codBuilder.toString();
+            
+            //---------------
+            // Não sei direito como funciona, só coloquei pq queria testar e compilar o Go aqui mesmo.
             try {
                 Files.write(Paths.get("gerado.go"), codigoGo.getBytes()); // Escreve o conteúdo no arquivo "gerado.go"
                 Process processo = Runtime.getRuntime().exec("go run gerado.go"); // Executa o código Go usando o terminal
@@ -53,6 +56,8 @@ public class Parser {
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
+            //---------------
+            
         }else{
             erro();
         }
