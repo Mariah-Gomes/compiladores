@@ -13,7 +13,15 @@ public class TabelaDeSimbolos {
     public void inserirTabela(String nome, String tipoVar, String tipoVal,
             Object valor){
         if(!tabela.containsKey(nome)){
-            tabela.put(nome, new Simbolo(nome, tipoVar, tipoVal, valor));
+            if(tipoVal == null || 
+                    (tipoVar.equals("Inteiro") && tipoVal.equals("NUM_INTEIRO")) ||
+                    (tipoVar.equals("Decimal") && tipoVal.equals("NUM_DECIMAL")) ||
+                    (tipoVar.equals("Texto") && tipoVal.equals("TEXTO"))){
+                tabela.put(nome, new Simbolo(nome, tipoVar, tipoVal, valor));
+            }else{
+                System.out.println("Erro: valor da variavel '" + nome +
+                        "' nao condiz com o tipo declarado.");
+            }
         }else{
             System.out.println("Erro: identficador '" + nome +
                     "' já declarado.");
