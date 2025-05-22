@@ -1,1 +1,3 @@
-Inteiro i = "oi";
+Inteiro i;
+
+i = 1;
