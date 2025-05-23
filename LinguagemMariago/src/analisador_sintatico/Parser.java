@@ -43,21 +43,7 @@ public class Parser {
             System.out.println("");
             tabela.imprimirTabela();
             System.out.println("");
-            String codigoGo = codBuilder.toString();
-            
-            //---------------
-            // Não sei direito como funciona, só coloquei pq queria testar e compilar o Go aqui mesmo.
-//            try {
-//                Files.write(Paths.get("gerado.go"), codigoGo.getBytes()); // Escreve o conteúdo no arquivo "gerado.go"
-//                Process processo = Runtime.getRuntime().exec("go run gerado.go"); // Executa o código Go usando o terminal
-//                processo.waitFor(); // Espera o processo terminar
-//                new java.util.Scanner(processo.getInputStream()).useDelimiter("\\A") // Imprime a saída do processo
-//                    .forEachRemaining(System.out::println);
-//            } catch (IOException | InterruptedException e) {
-//                e.printStackTrace();
-//            }
-            //---------------
-            
+            String codigoGo = codBuilder.toString();   
         }else{
             erro();
         }
@@ -542,6 +528,7 @@ public class Parser {
                     codBuilder.append(tipoVarTipoVar(tradutor.get(0)));
                     tradutor.clear();
                     if(matchL(",", parametro)){
+                        codBuilder.append(", ");
                         if(parametro(parametro)){
                             return true;
                         }

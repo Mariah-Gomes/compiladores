@@ -1,4 +1,23 @@
 Destino main(){
-    Exibir("Hello World!");
-    Inteiro i = 20;
+    Inteiro i;
+    Exibir("Digite o num inicial:");
+    Inserir(i);
+    
+    Inteiro j;
+    Exibir("Digite o num final:");
+    Inserir(j);
+    
+    Exibir(" ");
+    D rec(i, j);
+}
+
+Destino rec(Inteiro i, Inteiro j){
+    Quest(i > j){
+        Si{Retorna i;}
+        No{
+            Exibir(i);
+            i = i + 1;
+            Retorna D rec(i, j);
+        }
+    }
 }
